@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://du47r3af81ui5"]
+
+[ext_resource type="Texture2D" uid="uid://dfoykrqv7hhg4" path="res://Assets/Images/Units/Placeholder.png" id="1_akisb"]
+[ext_resource type="Script" uid="uid://d2druhdrfqe43" path="res://Scripts/unit.gd" id="1_ysllt"]
+
+[node name="Placeholder" type="Node2D" unique_id=1799240731]
+script = ExtResource("1_ysllt")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=133330561]
+texture = ExtResource("1_akisb")

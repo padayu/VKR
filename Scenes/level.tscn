@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://d14sybyvneawk"]
+
+[ext_resource type="Script" uid="uid://fkx8gqqo3bmn" path="res://Scripts/level.gd" id="1_81xng"]
+[ext_resource type="Script" uid="uid://bq11bkwp74gi1" path="res://Scripts/level_serializer.gd" id="1_tumq0"]
+[ext_resource type="Script" uid="uid://c3btc60lgyywm" path="res://Scripts/wave_manager.gd" id="2_k5f4k"]
+[ext_resource type="Script" uid="uid://dx7gxwspv65jt" path="res://Scripts/game_field.gd" id="3_6phgx"]
+[ext_resource type="Script" uid="uid://8gp2d1t6qwaa" path="res://Scripts/resource_manager.gd" id="4_8c0lf"]
+[ext_resource type="Script" uid="uid://qf13qgnl44p5" path="res://Scripts/unit_loadout.gd" id="5_wqkje"]
+[ext_resource type="Script" uid="uid://4jcdsn2s58j3" path="res://Scripts/unit_cards.gd" id="6_0f350"]
+[ext_resource type="Script" uid="uid://d10718255r072" path="res://Scripts/mana_counter.gd" id="6_754fn"]
+[ext_resource type="Script" uid="uid://bcnkfv5r2rce2" path="res://Scripts/field_border_shape.gd" id="6_bvt00"]
+[ext_resource type="Script" uid="uid://bwmnyjdha2lbt" path="res://Scripts/units.gd" id="6_qxfql"]
+[ext_resource type="Script" uid="uid://dwne6l3y0phay" path="res://Scripts/editor_gui.gd" id="10_oqgf2"]
+[ext_resource type="Script" uid="uid://ddbpppgjw1283" path="res://Scripts/waves_list.gd" id="12_ha31o"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bvt00"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c0lf"]
+
+[node name="Level" type="Node2D" unique_id=1554892295]
+script = ExtResource("1_81xng")
+
+[node name="LevelSerializer" type="Node" parent="." unique_id=1159525868]
+script = ExtResource("1_tumq0")
+metadata/_custom_type_script = "uid://bq11bkwp74gi1"
+
+[node name="WaveManager" type="Node" parent="." unique_id=600016720]
+script = ExtResource("2_k5f4k")
+
+[node name="ResourceManager" type="Node" parent="." unique_id=1550482128]
+script = ExtResource("4_8c0lf")
+
+[node name="Timer" type="Timer" parent="ResourceManager" unique_id=1552728689]
+
+[node name="GameField" type="Node2D" parent="." unique_id=878791011]
+script = ExtResource("3_6phgx")
+
+[node name="Units" type="Node" parent="GameField" unique_id=1842589509]
+script = ExtResource("6_qxfql")
+
+[node name="Projectiles" type="Node" parent="GameField" unique_id=418835466]
+
+[node name="UnitFieldPreview" type="Sprite2D" parent="GameField" unique_id=1873952451]
+modulate = Color(1, 1, 1, 0.2627451)
+z_index = 1
+
+[node name="FieldBorder" type="Area2D" parent="GameField" unique_id=1963407119]
+z_index = 10
+collision_layer = 0
+collision_mask = 2
+
+[node name="FieldBorderShape" type="CollisionShape2D" parent="GameField/FieldBorder" unique_id=1815245241]
+shape = SubResource("SegmentShape2D_bvt00")
+debug_color = Color(0, 0.6, 0.69803923, 0.84313726)
+script = ExtResource("6_bvt00")
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1111521467]
+
+[node name="GameGUI" type="CanvasLayer" parent="." unique_id=487494304]
+
+[node name="EndLevelPanel" type="Panel" parent="GameGUI" unique_id=982190997]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="GameGUI/EndLevelPanel" unique_id=2040027804]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Victory" type="Label" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2000088903]
+visible = false
+layout_mode = 2
+text = "Victory"
+
+[node name="Defeat" type="Label" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2140803923]
+visible = false
+layout_mode = 2
+text = "Defeat"
+
+[node name="BackToMenu" type="Button" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2064862431]
+layout_mode = 2
+text = "Menu"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameGUI" unique_id=1235830076]
+custom_minimum_size = Vector2(700, 200)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="ManaCounter" type="Label" parent="GameGUI/HBoxContainer" unique_id=1622670664]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_8c0lf")
+text = "0"
+vertical_alignment = 1
+script = ExtResource("6_754fn")
+
+[node name="UnitLoadout" type="Control" parent="GameGUI/HBoxContainer" unique_id=380625637]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("5_wqkje")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameGUI/HBoxContainer/UnitLoadout" unique_id=1948029140]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
+mouse_filter = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="UnitCards" type="HBoxContainer" parent="GameGUI/HBoxContainer/UnitLoadout/MarginContainer" unique_id=1265781329]
+layout_mode = 2
+theme_override_constants/separation = 4
+script = ExtResource("6_0f350")
+
+[node name="EditorGUI" type="CanvasLayer" parent="." unique_id=652571334]
+process_mode = 3
+script = ExtResource("10_oqgf2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditorGUI" unique_id=365358028]
+custom_minimum_size = Vector2(500, 200)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = -105.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="WavesList" type="VBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=1893982659]
+layout_mode = 2
+script = ExtResource("12_ha31o")
+
+[node name="WaveRelatedButtons" type="HBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=1842798730]
+layout_mode = 2
+
+[node name="SaveWaves" type="Button" parent="EditorGUI/VBoxContainer/WaveRelatedButtons" unique_id=1248001878]
+layout_mode = 2
+text = "Apply waves"
+
+[node name="AddWave" type="Button" parent="EditorGUI/VBoxContainer/WaveRelatedButtons" unique_id=431770268]
+layout_mode = 2
+text = "Add"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=662582821]
+layout_mode = 2
+
+[node name="Lawn" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=1235422609]
+layout_mode = 2
+text = "Lawn"
+
+[node name="Stone" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=16239589]
+layout_mode = 2
+text = "Stone"
+
+[node name="Cancel" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=1042006557]
+layout_mode = 2
+text = "Cancel"
+
+[node name="PauseButton" type="Button" parent="EditorGUI/VBoxContainer" unique_id=1956933928]
+layout_mode = 2
+text = "Pause/Unpause"
+
+[node name="SaveStateButton" type="Button" parent="EditorGUI/VBoxContainer" unique_id=824620632]
+layout_mode = 2
+text = "save level"
+
+[connection signal="field_data_extracted" from="LevelSerializer" to="WaveManager" method="_on_level_loader_field_data_extracted"]
+[connection signal="generate_unit_loadout" from="LevelSerializer" to="GameGUI/HBoxContainer/UnitLoadout" method="_on_level_loader_generate_unit_loadout"]
+[connection signal="wave_data_extracted" from="LevelSerializer" to="WaveManager" method="_on_level_loader_wave_data_extracted"]
+[connection signal="wave_data_extracted" from="LevelSerializer" to="EditorGUI/VBoxContainer/WavesList" method="_on_level_serializer_wave_data_extracted"]
+[connection signal="no_more_timed_waves" from="WaveManager" to="GameField" method="_on_wave_manager_no_more_timed_waves"]
+[connection signal="spawn_enemy_in_row" from="WaveManager" to="GameField" method="_on_wave_manager_spawn_enemy_in_row"]
+[connection signal="mana_value_changed" from="ResourceManager" to="GameGUI/HBoxContainer/ManaCounter" method="_on_resource_manager_mana_value_changed"]
+[connection signal="mana_value_changed" from="ResourceManager" to="GameGUI/HBoxContainer/UnitLoadout" method="_on_resource_manager_mana_value_changed"]
+[connection signal="timeout" from="ResourceManager/Timer" to="ResourceManager" method="_on_timer_timeout"]
+[connection signal="all_enemies_eliminated" from="GameField" to="." method="_on_game_field_all_enemies_eliminated"]
+[connection signal="mana_payment_needed" from="GameField" to="ResourceManager" method="_on_game_field_mana_payment_needed"]
+[connection signal="move_and_resize_field_border" from="GameField" to="GameField/FieldBorder/FieldBorderShape" method="_on_game_field_move_and_resize_field_border"]
+[connection signal="on_add_unit" from="GameField" to="GameField/Units" method="_on_game_field_on_add_unit"]
+[connection signal="area_entered" from="GameField/FieldBorder" to="." method="_on_field_border_area_entered"]
+[connection signal="pressed" from="GameGUI/EndLevelPanel/HBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="generated_unit_cards" from="GameGUI/HBoxContainer/UnitLoadout" to="GameGUI/HBoxContainer/UnitLoadout/MarginContainer/UnitCards" method="_on_unit_loadout_generated_unit_cards"]
+[connection signal="selected_unit_card" from="GameGUI/HBoxContainer/UnitLoadout" to="GameField" method="_on_unit_loadout_selected_unit_card"]
+[connection signal="on_editor_tile_type_changed" from="EditorGUI" to="GameField" method="_on_editor_gui_on_editor_tile_type_changed"]
+[connection signal="on_waves_list_ready" from="EditorGUI/VBoxContainer/WavesList" to="WaveManager" method="_on_waves_list_on_waves_list_ready"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/WaveRelatedButtons/SaveWaves" to="WaveManager" method="_on_save_waves_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/WaveRelatedButtons/AddWave" to="EditorGUI/VBoxContainer/WavesList" method="_on_add_wave_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Lawn" to="EditorGUI" method="_on_lawn_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Stone" to="EditorGUI" method="_on_stone_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Cancel" to="EditorGUI" method="_on_cancel_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="EditorGUI/VBoxContainer/SaveStateButton" to="LevelSerializer" method="_on_save_level_button_pressed"]

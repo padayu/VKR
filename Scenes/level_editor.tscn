@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://do7d1tes35glv"]
+
+[ext_resource type="Script" uid="uid://dpmk2tykw3rdj" path="res://Scripts/level_editor.gd" id="1_5o76e"]
+[ext_resource type="Script" uid="uid://dyn3ujetkgg7e" path="res://Scripts/file_dialog.gd" id="2_s1b0e"]
+[ext_resource type="Script" uid="uid://o2fsydek0qlg" path="res://Scripts/file_dialog_save.gd" id="3_n1xa8"]
+
+[node name="LevelEditor" type="Node2D" unique_id=284948613]
+script = ExtResource("1_5o76e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2122715923]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1846514294]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=653748981]
+layout_mode = 2
+text = "Back"
+
+[node name="LoadFromFile" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1295512261]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load from file"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=539453520]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/VBoxContainer" unique_id=707438098]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Width" type="Label" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1652334931]
+layout_mode = 2
+text = "Width"
+
+[node name="WidthSpinBox" type="SpinBox" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1535613689]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="Height" type="Label" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1732971911]
+layout_mode = 2
+text = "Height"
+
+[node name="HeightSpinBox" type="SpinBox" parent="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer" unique_id=134187806]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+rounded = true
+
+[node name="Waves" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/VBoxContainer" unique_id=1725478355]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="AddWave" type="Button" parent="CanvasLayer/VBoxContainer/VBoxContainer/Waves" unique_id=1720919992]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Add wave"
+
+[node name="Export" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1458962518]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save"
+
+[node name="FileDialogOpen" type="FileDialog" parent="." unique_id=1091676662]
+title = "Open a File"
+file_mode = 0
+script = ExtResource("2_s1b0e")
+
+[node name="FileDialogSave" type="FileDialog" parent="." unique_id=1308975326]
+script = ExtResource("3_n1xa8")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/LoadFromFile" to="." method="_on_load_from_file_pressed"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer/WidthSpinBox" to="." method="_on_width_spin_box_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/VBoxContainer/VBoxContainer/HBoxContainer/HeightSpinBox" to="." method="_on_height_spin_box_value_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/VBoxContainer/Waves/AddWave" to="." method="_on_add_wave_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Export" to="." method="_on_export_pressed"]
+[connection signal="file_selected" from="FileDialogOpen" to="." method="_on_file_dialog_file_selected"]
+[connection signal="file_selected" from="FileDialogSave" to="." method="_on_file_dialog_save_file_selected"]

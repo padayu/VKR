@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bw62x2j4n40l5"]
+
+[ext_resource type="Script" uid="uid://dqq23j6nfg6q5" path="res://Scripts/roomba_enemy.gd" id="1_5cgxh"]
+[ext_resource type="Texture2D" uid="uid://b0l3yklc68b7y" path="res://Assets/Images/Enemies/roomba.png" id="2_ta62r"]
+[ext_resource type="Script" uid="uid://cyfeovhqqnoln" path="res://Scenes/Enemies/detectable_area.gd" id="3_8bt8a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lc2uo"]
+size = Vector2(128, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jgjf"]
+size = Vector2(80, 16)
+
+[node name="RoombaEnemy" type="Node2D" unique_id=651596543]
+script = ExtResource("1_5cgxh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=321277667]
+texture = ExtResource("2_ta62r")
+
+[node name="UnitDetectionArea" type="Area2D" parent="." unique_id=1449963786]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitDetectionArea" unique_id=1139267050]
+position = Vector2(-16, 0)
+shape = SubResource("RectangleShape2D_lc2uo")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=64925231]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_8bt8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=414951883]
+shape = SubResource("RectangleShape2D_6jgjf")
+
+[connection signal="health_changed" from="." to="." method="_on_health_changed"]
+[connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]

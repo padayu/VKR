@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cbvs4advd80gc"]
+
+[ext_resource type="Script" uid="uid://c1jukp7vqhfuw" path="res://Scripts/tile.gd" id="1_xsjyq"]
+[ext_resource type="Texture2D" uid="uid://dvycsrs2vmra6" path="res://Assets/Images/Tiles/lawn1.png" id="2_rvq8p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4kj4d"]
+size = Vector2(145, 100)
+
+[node name="Tile" type="Node2D" unique_id=1237826963]
+script = ExtResource("1_xsjyq")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=139935770]
+
+[node name="Sprite" type="Sprite2D" parent="Area2D" unique_id=1327734770]
+texture = ExtResource("2_rvq8p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1296939350]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_4kj4d")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

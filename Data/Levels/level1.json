@@ -1,0 +1,41 @@
+{
+	"field": {
+		"x": 11,
+		"y": 7,
+		"gap": 0.0,
+		"tiles": [
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+			["lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn", "lawn"],
+		],
+		"units": []
+	},
+	"enemies": {
+		"waves": {
+			"timed_waves": [
+			{
+				"timer": 10,
+				"enemies": {
+					"roomba": 1
+					}
+			},
+			{
+				"timer": 20,
+				"enemies": {
+					"roomba": 2
+					}
+			},
+			{
+				"timer": 30,
+				"enemies": {
+					"roomba": 4
+					}
+			}
+		]
+		}
+	}
+}

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqh357culcthg"]
+
+[ext_resource type="Texture2D" uid="uid://c7yy888bfn74e" path="res://Assets/Images/Units/viguvigu.png" id="1_y38ft"]
+
+[node name="ViguVigu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_y38ft")

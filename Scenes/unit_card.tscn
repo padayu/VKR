@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://vdwd34g0je64"]
+
+[ext_resource type="Texture2D" uid="uid://dflmv4xpkqmtw" path="res://Assets/Images/unit_card.png" id="1_6n0jv"]
+[ext_resource type="Script" uid="uid://c833scygrg7oj" path="res://Scripts/unit_card.gd" id="1_pbhe7"]
+[ext_resource type="Texture2D" uid="uid://dfoykrqv7hhg4" path="res://Assets/Images/Units/Placeholder.png" id="2_aq1to"]
+[ext_resource type="Script" uid="uid://dctuhgs1gx83b" path="res://Scripts/unit_name.gd" id="3_wi33x"]
+[ext_resource type="Script" uid="uid://c4bx46bhib1qn" path="res://Scripts/preview_image.gd" id="4_vlxft"]
+[ext_resource type="Script" uid="uid://cvqarjmnsmav8" path="res://Scripts/unit_cost.gd" id="6_k5v1w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wi33x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pbhe7"]
+bg_color = Color(0.23529412, 0.23529412, 0.23529412, 0.7019608)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlxft"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pbhe7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4npmm"]
+font_size = 7
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r36ey"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+
+[node name="UnitCard" type="Button"]
+custom_minimum_size = Vector2(80, 110)
+offset_right = 80.0
+offset_bottom = 110.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wi33x")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pbhe7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vlxft")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pbhe7")
+disabled = true
+toggle_mode = true
+script = ExtResource("1_pbhe7")
+
+[node name="Card" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+offset_right = 80.0
+offset_bottom = 110.0
+texture = ExtResource("1_6n0jv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 80.0
+offset_bottom = 110.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="UnitName" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "DEFAULTNAME"
+label_settings = SubResource("LabelSettings_4npmm")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_wi33x")
+
+[node name="PreviewImage" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_aq1to")
+expand_mode = 1
+script = ExtResource("4_vlxft")
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="UnitCost" type="Label" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = "PRICETAG"
+label_settings = SubResource("LabelSettings_r36ey")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_k5v1w")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="set_preview_image" from="." to="VBoxContainer/PreviewImage" method="_on_unit_card_set_preview_image"]
+[connection signal="set_unit_cost" from="." to="VBoxContainer/MarginContainer2/UnitCost" method="_on_unit_card_set_unit_cost"]
+[connection signal="set_unit_name" from="." to="VBoxContainer/MarginContainer/UnitName" method="_on_unit_card_set_unit_name"]
+[connection signal="toggled" from="." to="." method="_on_toggled"]

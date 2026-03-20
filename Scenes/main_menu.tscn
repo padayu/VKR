@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bhfx41rnyv7g7"]
+
+[ext_resource type="Script" uid="uid://bsyo8vwjaa8m4" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/level_select_file_dialog.gd" id="2_48xlc"]
+
+[node name="MainMenu" type="Node2D" unique_id=2109787740]
+script = ExtResource("1_28flt")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2139943560]
+
+[node name="SelectFileButton" type="Button" parent="." unique_id=2054186504]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Select File"
+
+[node name="CampaignButton" type="Button" parent="." unique_id=1258150983]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Campaign"
+
+[node name="EditorButton" type="Button" parent="." unique_id=435055609]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Level Editor"
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=1880376063]
+title = "Open a File"
+size = Vector2i(800, 500)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+script = ExtResource("2_48xlc")
+
+[connection signal="pressed" from="SelectFileButton" to="." method="_on_select_file_pressed"]
+[connection signal="pressed" from="EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
