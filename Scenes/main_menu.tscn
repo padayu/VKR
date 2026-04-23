@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://bhfx41rnyv7g7"]
 
 [ext_resource type="Script" uid="uid://bsyo8vwjaa8m4" path="res://Scripts/main_menu.gd" id="1_28flt"]
-[ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/level_select_file_dialog.gd" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://dlylss0mxigp7" path="res://Assets/Images/UI/Button1.png" id="2_1ehe0"]
+[ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/gui/level_select_file_dialog.gd" id="2_48xlc"]
 
 [node name="MainMenu" type="Node2D" unique_id=2109787740]
 script = ExtResource("1_28flt")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2139943560]
 
-[node name="SelectFileButton" type="Button" parent="." unique_id=2054186504]
+[node name="SelectFileButton" type="TextureButton" parent="." unique_id=1988035587]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -20,10 +21,32 @@ offset_right = 200.0
 offset_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Select File"
+texture_normal = ExtResource("2_1ehe0")
+texture_pressed = ExtResource("2_1ehe0")
+texture_hover = ExtResource("2_1ehe0")
+texture_disabled = ExtResource("2_1ehe0")
+texture_focused = ExtResource("2_1ehe0")
+stretch_mode = 0
 
-[node name="CampaignButton" type="Button" parent="." unique_id=1258150983]
+[node name="Label" type="Label" parent="SelectFileButton" unique_id=1213840803]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -11.5
+offset_right = 44.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Choose File"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CampaignButton" type="TextureButton" parent="." unique_id=190702234]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -35,10 +58,32 @@ offset_right = 200.0
 offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "Campaign"
+texture_normal = ExtResource("2_1ehe0")
+texture_pressed = ExtResource("2_1ehe0")
+texture_hover = ExtResource("2_1ehe0")
+texture_disabled = ExtResource("2_1ehe0")
+texture_focused = ExtResource("2_1ehe0")
+stretch_mode = 0
 
-[node name="EditorButton" type="Button" parent="." unique_id=435055609]
+[node name="Label" type="Label" parent="CampaignButton" unique_id=1682070250]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -11.5
+offset_right = 44.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Campaign"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EditorButton" type="TextureButton" parent="." unique_id=2138722462]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -50,8 +95,44 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 50
+texture_normal = ExtResource("2_1ehe0")
+texture_pressed = ExtResource("2_1ehe0")
+texture_hover = ExtResource("2_1ehe0")
+texture_disabled = ExtResource("2_1ehe0")
+texture_focused = ExtResource("2_1ehe0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="EditorButton" unique_id=205552454]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -11.5
+offset_right = 44.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
 text = "Level Editor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="Button" parent="." unique_id=1485372682]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = 320.0
+offset_right = 56.0
+offset_bottom = 376.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Quit"
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=1880376063]
 title = "Open a File"
@@ -62,5 +143,7 @@ filters = PackedStringArray("*.json")
 script = ExtResource("2_48xlc")
 
 [connection signal="pressed" from="SelectFileButton" to="." method="_on_select_file_pressed"]
+[connection signal="pressed" from="CampaignButton" to="." method="_on_campaign_button_pressed"]
 [connection signal="pressed" from="EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

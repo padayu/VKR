@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dcjkcgnp6otu8"]
+
+[ext_resource type="Script" uid="uid://bl47gq2jk11nf" path="res://Scripts/units/ninja_kitten.gd" id="1_mnu4d"]
+[ext_resource type="Texture2D" uid="uid://rh8wr1w5s1wd" path="res://Assets/Images/Units/KittenNinja.png" id="2_ek8vk"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_dylwu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxtrr"]
+size = Vector2(842, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oinpw"]
+size = Vector2(80, 32)
+
+[node name="NinjaKittenUnit" type="Node2D" unique_id=804587915]
+script = ExtResource("1_mnu4d")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=390821250]
+texture = ExtResource("2_ek8vk")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=676265706]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" unique_id=145520972]
+position = Vector2(411, 0)
+shape = SubResource("RectangleShape2D_kxtrr")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=410963959]
+collision_mask = 0
+script = ExtResource("3_dylwu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=1252281239]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_oinpw")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1241222237]
+wait_time = 1.2
+
+[connection signal="area_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_entered"]
+[connection signal="area_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_exited"]

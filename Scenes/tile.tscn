@@ -7,9 +7,12 @@
 size = Vector2(145, 100)
 
 [node name="Tile" type="Node2D" unique_id=1237826963]
+process_mode = 3
 script = ExtResource("1_xsjyq")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=139935770]
+collision_layer = 4
+collision_mask = 0
 
 [node name="Sprite" type="Sprite2D" parent="Area2D" unique_id=1327734770]
 texture = ExtResource("2_rvq8p")

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cgspck3xvf5sj"]
+
+[ext_resource type="Script" uid="uid://gev4ab856cam" path="res://Scripts/editor_level_choice.gd" id="1_eroni"]
+[ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/gui/level_select_file_dialog.gd" id="2_2e17m"]
+
+[node name="EditorLevelChoice" type="Node2D" unique_id=83941129]
+script = ExtResource("1_eroni")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1493934851]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1088237449]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -33.0
+offset_right = 49.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChooseFile" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1206212160]
+layout_mode = 2
+text = "Choose file"
+
+[node name="CreateNew" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=376554810]
+layout_mode = 2
+text = "Create New"
+
+[node name="FileDialogOpen" type="FileDialog" parent="." unique_id=730553095]
+title = "Open a File"
+size = Vector2i(800, 500)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+script = ExtResource("2_2e17m")
+
+[node name="FileDialogCreate" type="FileDialog" parent="." unique_id=1740860357]
+size = Vector2i(800, 500)
+access = 2
+filters = PackedStringArray("*.json")
+script = ExtResource("2_2e17m")
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/ChooseFile" to="." method="_on_choose_file_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/CreateNew" to="." method="_on_create_new_pressed"]
+[connection signal="file_selected" from="FileDialogOpen" to="." method="_on_file_dialog_open_file_selected"]
+[connection signal="file_selected" from="FileDialogCreate" to="." method="_on_file_dialog_create_file_selected"]

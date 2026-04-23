@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ckng0a7rr60ew"]
+
+[ext_resource type="Script" uid="uid://c63r480kmgxf1" path="res://Scripts/units/planet_unit.gd" id="1_hseus"]
+[ext_resource type="Texture2D" uid="uid://d2ixrlc47n6vr" path="res://Assets/Images/Units/Earth.png" id="1_j335q"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="2_8qc1j"]
+[ext_resource type="PackedScene" uid="uid://ch4xtpv8u3vgg" path="res://Scenes/moon_projectile.tscn" id="3_8qc1j"]
+[ext_resource type="Script" uid="uid://spcqkrdlib4b" path="res://Scripts/orbit.gd" id="3_s2af6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2af6"]
+size = Vector2(96, 48)
+
+[node name="PlanetUnit" type="Node2D" unique_id=1839981994]
+script = ExtResource("1_hseus")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=110582000]
+texture = ExtResource("1_j335q")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=1523556000]
+collision_mask = 0
+script = ExtResource("2_8qc1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=1768670600]
+shape = SubResource("RectangleShape2D_s2af6")
+
+[node name="Orbit" type="Node2D" parent="." unique_id=154869913]
+script = ExtResource("3_s2af6")
+
+[node name="MoonProjectile" parent="Orbit" unique_id=1288464267 instance=ExtResource("3_8qc1j")]
+position = Vector2(120, 0)

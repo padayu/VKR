@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bag0u43ujnxk2"]
+
+[ext_resource type="Script" uid="uid://b3btua0gftpex" path="res://Scripts/units/archer_kitten_unit.gd" id="1_sq13s"]
+[ext_resource type="Texture2D" uid="uid://bpk83m0s0n6q6" path="res://Assets/Images/Units/Archer.png" id="2_sq13s"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_w5apc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0oy64"]
+size = Vector2(842, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42r7l"]
+size = Vector2(48, 72)
+
+[node name="ArcherKittenUnit" type="Node2D" unique_id=1066441209]
+script = ExtResource("1_sq13s")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542673207]
+texture = ExtResource("2_sq13s")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=528358360]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" unique_id=792589573]
+position = Vector2(411, 0)
+shape = SubResource("RectangleShape2D_0oy64")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=799811039]
+collision_mask = 0
+script = ExtResource("3_w5apc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=690137512]
+position = Vector2(-8, 4)
+shape = SubResource("RectangleShape2D_42r7l")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1140609710]
+wait_time = 2.5
+
+[connection signal="area_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_entered"]
+[connection signal="area_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_exited"]

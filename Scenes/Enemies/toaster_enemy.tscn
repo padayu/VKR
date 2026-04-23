@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://damkm54dp5wlm"]
+
+[ext_resource type="Script" uid="uid://cvawubc2kdr1w" path="res://Scripts/enemies/toaster_enemy.gd" id="1_v6o27"]
+[ext_resource type="Texture2D" uid="uid://behvw2n4tyf47" path="res://Assets/Images/Enemies/Toaster.png" id="2_0kukf"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_0kukf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5eap1"]
+size = Vector2(248, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omq8q"]
+size = Vector2(96, 40)
+
+[node name="ToasterEnemy" type="Node2D" unique_id=281785811]
+script = ExtResource("1_v6o27")
+metadata/_custom_type_script = "uid://cfdv2746dxo5o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2031774820]
+position = Vector2(-8.000006, -9.536743e-07)
+scale = Vector2(0.24380954, 0.16)
+texture = ExtResource("2_0kukf")
+
+[node name="UnitDetectionArea" type="Area2D" parent="." unique_id=830547054]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitDetectionArea" unique_id=128923519]
+position = Vector2(-76, 0)
+shape = SubResource("RectangleShape2D_5eap1")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=403923354]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_0kukf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=1475973353]
+position = Vector2(-8, -4)
+shape = SubResource("RectangleShape2D_omq8q")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1462942139]
+wait_time = 0.5
+
+[connection signal="area_entered" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_entered"]
+[connection signal="area_exited" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_exited"]
+[connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]
+[connection signal="taken_melee_hit" from="DetectableArea" to="." method="_on_detectable_area_taken_melee_hit"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

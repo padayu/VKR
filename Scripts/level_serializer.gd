@@ -68,8 +68,8 @@ func ValidateLevelData(level_data):
 
 func _ready() -> void:
 	UnpackLevel(GlobalLevelData.path)
-	GenerateUnitLoadout(["Kitten", "Vygu Vygu", "base_unit"])
+	GenerateUnitLoadout(["Kitten", "Mandrake", "Boxer", "Planet"])
 
 
 func _on_save_level_button_pressed() -> void:
-	PackLevel("saved.json")
+	PackLevel(GlobalLevelData.path)

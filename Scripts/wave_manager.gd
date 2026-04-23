@@ -22,9 +22,8 @@ func _process(delta: float) -> void:
 func _on_level_loader_wave_data_extracted(wave_data) -> void:
 	var timed_wave_data = wave_data["timed_waves"]
 	timed_waves = timed_wave_data
-	for wave in timed_waves:
-		for enemy in wave["enemies"]:
-			enemy_scenes[enemy] = load(GlobalEnemyDatabase.enemies[enemy]["path"])
+	for enemy in GlobalEnemyDatabase.enemies:
+		enemy_scenes[enemy] = load(GlobalEnemyDatabase.enemies[enemy]["path"])
 	recalculate_timed_wave()
 
 

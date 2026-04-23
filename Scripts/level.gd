@@ -7,9 +7,9 @@ var camera_zoom: Vector2
 @onready var wave_scheduler = $WaveScheduler
 @onready var game_field = $GameField
 @onready var camera: Camera2D = $Camera
-@onready var end_level_panel = $CanvasLayer/EndLevelPanel
-@onready var victory_label = $CanvasLayer/EndLevelPanel/HBoxContainer/Victory
-@onready var defeat_label = $CanvasLayer/EndLevelPanel/HBoxContainer/Defeat
+@onready var end_level_panel = $GameGUI/EndLevelPanel
+@onready var victory_label = $GameGUI/EndLevelPanel/HBoxContainer/Victory
+@onready var defeat_label = $GameGUI/EndLevelPanel/HBoxContainer/Defeat
 
 
 func SetCameraZoom(zoom: Vector2):
@@ -34,8 +34,12 @@ func lose():
 	defeat_label.visible = true
 
 
-func _on_back_to_menu_pressed() -> void:
+func go_back_to_main_menu():
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+
+func _on_back_to_menu_pressed() -> void:
+	go_back_to_main_menu()
 
 
 func _on_field_border_area_entered(area) -> void:
@@ -44,3 +48,7 @@ func _on_field_border_area_entered(area) -> void:
 
 func _on_pause_button_pressed() -> void:
 	get_tree().paused = !get_tree().paused
+
+
+func _on_quit_button_pressed() -> void:
+	go_back_to_main_menu()

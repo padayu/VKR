@@ -23,6 +23,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 GlobalLevelData="*res://Scripts/global_data/global_level_data.gd"
 GlobalUnitDatabase="*res://Scripts/global_data/global_unit_database.gd"
 GlobalEnemyDatabase="*res://Scripts/global_data/global_enemy_database.gd"
+GlobalEventBus="*uid://dwj2f6uj1vg5f"
 
 [display]
 

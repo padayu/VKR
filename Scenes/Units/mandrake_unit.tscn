@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dcb3bbnvmac5"]
+
+[ext_resource type="Script" uid="uid://7dq3bn2kh4wj" path="res://Scripts/units/mandrake_unit.gd" id="1_ypuoc"]
+[ext_resource type="Texture2D" uid="uid://bfrjkvsg5jjp0" path="res://Assets/Images/Units/Mandrake.png" id="2_bucqb"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_2epb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2fpo"]
+size = Vector2(32, 48)
+
+[node name="MandrakeUnit" type="Node2D" unique_id=127200478]
+script = ExtResource("1_ypuoc")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1792907624]
+texture = ExtResource("2_bucqb")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=1616385963]
+collision_mask = 0
+script = ExtResource("3_2epb6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=2102941918]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_f2fpo")
+
+[node name="ProductionTimer" type="Timer" parent="." unique_id=1397107311]
+wait_time = 0.5
+autostart = true
+
+[connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]
+[connection signal="taken_melee_hit" from="DetectableArea" to="." method="_on_detectable_area_taken_melee_hit"]

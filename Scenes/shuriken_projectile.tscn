@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b3n6y6pu44hot"]
+
+[ext_resource type="Script" uid="uid://dixomela5frg4" path="res://Scripts/shuriken_projectile.gd" id="1_t0g33"]
+[ext_resource type="Texture2D" uid="uid://cfqmhtxvwnu45" path="res://Assets/Images/Projectiles/Shuriken.png" id="2_t0o74"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0o74"]
+size = Vector2(32, 32)
+
+[node name="ShurikenProjectile" type="Node2D" unique_id=2055073753]
+script = ExtResource("1_t0g33")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1184817650]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_t0o74")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=2043312984]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=24234105]
+shape = SubResource("RectangleShape2D_t0o74")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

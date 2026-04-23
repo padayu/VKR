@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://do7d1tes35glv"]
 
 [ext_resource type="Script" uid="uid://dpmk2tykw3rdj" path="res://Scripts/level_editor.gd" id="1_5o76e"]
-[ext_resource type="Script" uid="uid://dyn3ujetkgg7e" path="res://Scripts/file_dialog.gd" id="2_s1b0e"]
-[ext_resource type="Script" uid="uid://o2fsydek0qlg" path="res://Scripts/file_dialog_save.gd" id="3_n1xa8"]
+[ext_resource type="Script" uid="uid://dyn3ujetkgg7e" path="res://Scripts/gui/file_dialog.gd" id="2_s1b0e"]
+[ext_resource type="Script" uid="uid://o2fsydek0qlg" path="res://Scripts/gui/file_dialog_save.gd" id="3_n1xa8"]
 
 [node name="LevelEditor" type="Node2D" unique_id=284948613]
 script = ExtResource("1_5o76e")

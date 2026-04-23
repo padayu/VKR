@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bl3mk7o2glcbf"]
+
+[ext_resource type="Texture2D" uid="uid://bhbhr6bikiuae" path="res://Assets/Images/Units/Boxer.png" id="1_mileq"]
+[ext_resource type="Script" uid="uid://dnbsbf7etxhbu" path="res://Scripts/units/boxer_unit.gd" id="1_ts8j2"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="2_ts8j2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d62qf"]
+size = Vector2(130, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhvx0"]
+size = Vector2(96, 56)
+
+[node name="BoxerUnit" type="Node2D" unique_id=1400771741]
+script = ExtResource("1_ts8j2")
+metadata/_custom_type_script = "uid://d2druhdrfqe43"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1714673393]
+texture = ExtResource("1_mileq")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=2089102717]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" unique_id=778060058]
+position = Vector2(55, 0)
+shape = SubResource("RectangleShape2D_d62qf")
+
+[node name="DetectableArea" type="Area2D" parent="." unique_id=221390228]
+collision_mask = 0
+script = ExtResource("2_ts8j2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=976050940]
+position = Vector2(-8, 4)
+shape = SubResource("RectangleShape2D_rhvx0")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=659486111]
+
+[connection signal="area_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_entered"]
+[connection signal="area_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_exited"]
+[connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]
+[connection signal="taken_melee_hit" from="DetectableArea" to="." method="_on_detectable_area_taken_melee_hit"]

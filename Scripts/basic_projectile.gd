@@ -7,9 +7,16 @@ extends Node2D
 const BASE_DAMAGE = 3
 const BASE_SPEED = 140
 const BASE_DIRECTION = Vector2(1, 0)
+const MAX_LIFETIME = 20
+
+
+var lifetime = 0
 
 
 func _process(delta: float) -> void:
+	lifetime += delta
+	if lifetime > MAX_LIFETIME:
+		queue_free()
 	position += BASE_DIRECTION * BASE_SPEED * delta
 
 

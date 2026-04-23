@@ -88,6 +88,7 @@ func spawn_unit(unit_data):
 	unit.position = position
 	self.occupying_unit = unit
 	unit.set_occupied_tile(self)
+	unit.promoted.connect(_on_unit_promoted)
 
 
 func UpdateSprite():
@@ -98,3 +99,9 @@ func change_type(new_type: String):
 	tile_type = TypeNames[new_type]
 	SetCorrectTexture()
 	UpdateSprite()
+
+
+func _on_unit_promoted(new_type):
+	var new_unit_data = GlobalUnitDatabase.units[new_type]
+	occupying_unit.queue_free()
+	spawn_unit(new_unit_data)

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ropa4x8a8sh3"]
+
+[ext_resource type="Script" uid="uid://bjfkguglthwfm" path="res://Scripts/damage_number.gd" id="1_n4jia"]
+[ext_resource type="Script" uid="uid://ds4jaebigkig5" path="res://Scripts/damage_number_label.gd" id="2_m808r"]
+
+[node name="DamageNumber" type="Node2D" unique_id=1787128768]
+z_index = 1
+script = ExtResource("1_n4jia")
+
+[node name="DamageNumberLabel" type="Label" parent="." unique_id=1319294552]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "aboba"
+script = ExtResource("2_m808r")
+
+[connection signal="set_label_color" from="." to="DamageNumberLabel" method="_on_damage_number_set_label_color"]
+[connection signal="set_label_text" from="." to="DamageNumberLabel" method="_on_damage_number_set_label_text"]

@@ -5,13 +5,13 @@
 [ext_resource type="Script" uid="uid://c3btc60lgyywm" path="res://Scripts/wave_manager.gd" id="2_k5f4k"]
 [ext_resource type="Script" uid="uid://dx7gxwspv65jt" path="res://Scripts/game_field.gd" id="3_6phgx"]
 [ext_resource type="Script" uid="uid://8gp2d1t6qwaa" path="res://Scripts/resource_manager.gd" id="4_8c0lf"]
-[ext_resource type="Script" uid="uid://qf13qgnl44p5" path="res://Scripts/unit_loadout.gd" id="5_wqkje"]
-[ext_resource type="Script" uid="uid://4jcdsn2s58j3" path="res://Scripts/unit_cards.gd" id="6_0f350"]
-[ext_resource type="Script" uid="uid://d10718255r072" path="res://Scripts/mana_counter.gd" id="6_754fn"]
+[ext_resource type="Script" uid="uid://qf13qgnl44p5" path="res://Scripts/gui/unit_loadout.gd" id="5_wqkje"]
+[ext_resource type="Script" uid="uid://4jcdsn2s58j3" path="res://Scripts/gui/unit_cards.gd" id="6_0f350"]
+[ext_resource type="Script" uid="uid://d10718255r072" path="res://Scripts/gui/mana_counter.gd" id="6_754fn"]
 [ext_resource type="Script" uid="uid://bcnkfv5r2rce2" path="res://Scripts/field_border_shape.gd" id="6_bvt00"]
 [ext_resource type="Script" uid="uid://bwmnyjdha2lbt" path="res://Scripts/units.gd" id="6_qxfql"]
-[ext_resource type="Script" uid="uid://dwne6l3y0phay" path="res://Scripts/editor_gui.gd" id="10_oqgf2"]
-[ext_resource type="Script" uid="uid://ddbpppgjw1283" path="res://Scripts/waves_list.gd" id="12_ha31o"]
+[ext_resource type="Script" uid="uid://dwne6l3y0phay" path="res://Scripts/gui/editor_gui.gd" id="10_oqgf2"]
+[ext_resource type="Script" uid="uid://ddbpppgjw1283" path="res://Scripts/gui/waves_list.gd" id="12_ha31o"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bvt00"]
 
@@ -130,8 +130,19 @@ layout_mode = 2
 theme_override_constants/separation = 4
 script = ExtResource("6_0f350")
 
+[node name="QuitButton" type="Button" parent="GameGUI" unique_id=182246171]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Quit"
+
 [node name="EditorGUI" type="CanvasLayer" parent="." unique_id=652571334]
 process_mode = 3
+visible = false
 script = ExtResource("10_oqgf2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorGUI" unique_id=365358028]
@@ -201,6 +212,7 @@ text = "save level"
 [connection signal="pressed" from="GameGUI/EndLevelPanel/HBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
 [connection signal="generated_unit_cards" from="GameGUI/HBoxContainer/UnitLoadout" to="GameGUI/HBoxContainer/UnitLoadout/MarginContainer/UnitCards" method="_on_unit_loadout_generated_unit_cards"]
 [connection signal="selected_unit_card" from="GameGUI/HBoxContainer/UnitLoadout" to="GameField" method="_on_unit_loadout_selected_unit_card"]
+[connection signal="pressed" from="GameGUI/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="on_editor_tile_type_changed" from="EditorGUI" to="GameField" method="_on_editor_gui_on_editor_tile_type_changed"]
 [connection signal="on_waves_list_ready" from="EditorGUI/VBoxContainer/WavesList" to="WaveManager" method="_on_waves_list_on_waves_list_ready"]
 [connection signal="pressed" from="EditorGUI/VBoxContainer/WaveRelatedButtons/SaveWaves" to="WaveManager" method="_on_save_waves_pressed"]

@@ -1,18 +1,21 @@
 [gd_scene format=3 uid="uid://bkewg5g5qxwm4"]
 
-[ext_resource type="Script" uid="uid://1d8uj8tt55s6" path="res://Scripts/brave_kitten.gd" id="1_ms42d"]
+[ext_resource type="Script" uid="uid://1d8uj8tt55s6" path="res://Scripts/units/brave_kitten.gd" id="1_ms42d"]
 [ext_resource type="Texture2D" uid="uid://o2p33ew5siak" path="res://Assets/Images/Units/Kitten.png" id="2_iejmr"]
+[ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_iejmr"]
+[ext_resource type="Script" uid="uid://bl1lrf1eu57s2" path="res://Scripts/gui/upgrade_button.gd" id="4_m002s"]
+[ext_resource type="Script" uid="uid://bv4ngw4vnip0j" path="res://Scripts/gui/upgrades.gd" id="4_sg84m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ms42d"]
 size = Vector2(842, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iejmr"]
-size = Vector2(80, 16)
+size = Vector2(80, 32)
 
 [node name="BraveKitten" type="Node2D" unique_id=795442080]
 script = ExtResource("1_ms42d")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=983958305]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1508710340]
 texture = ExtResource("2_iejmr")
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=436343764]
@@ -25,12 +28,39 @@ shape = SubResource("RectangleShape2D_ms42d")
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=1399614475]
 collision_mask = 0
+script = ExtResource("3_iejmr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=767084958]
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_iejmr")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=7283974]
 wait_time = 1.5
 
+[node name="Upgrades" type="HBoxContainer" parent="." unique_id=624019212]
+offset_left = -48.0
+offset_top = 16.0
+offset_right = 57.0
+offset_bottom = 56.0
+script = ExtResource("4_sg84m")
+
+[node name="Ninja" type="Button" parent="Upgrades" unique_id=419003821]
+layout_mode = 2
+disabled = true
+text = "1(50)"
+script = ExtResource("4_m002s")
+unit_type = "NinjaKitten"
+upgrade_cost = 50
+
+[node name="Archer" type="Button" parent="Upgrades" unique_id=1983205141]
+layout_mode = 2
+disabled = true
+text = "2(100)"
+script = ExtResource("4_m002s")
+unit_type = "ArcherKitten"
+upgrade_cost = 100
+
 [connection signal="area_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_entered"]
 [connection signal="area_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_area_exited"]
+[connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]
+[connection signal="taken_melee_hit" from="DetectableArea" to="." method="_on_detectable_area_taken_melee_hit"]

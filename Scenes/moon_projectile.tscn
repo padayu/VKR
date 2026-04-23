@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://ch4xtpv8u3vgg"]
+
+[ext_resource type="Script" uid="uid://cc75varrvpey0" path="res://Scripts/moon_projectile.gd" id="1_5vobi"]
+[ext_resource type="Texture2D" uid="uid://7kwbyp0w68tb" path="res://Assets/Images/Projectiles/Moon.png" id="2_juvee"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_05py6"]
+radius = 16.0
+
+[node name="MoonProjectile" type="Node2D" unique_id=1288464267]
+script = ExtResource("1_5vobi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1353506782]
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_juvee")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1465053707]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1215872705]
+shape = SubResource("CircleShape2D_05py6")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

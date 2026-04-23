@@ -177,7 +177,8 @@ func ExtractData():
 	var unit_data = []
 	for unit in units.get_children():
 		unit_data.append(unit.get_data())
-	data["units"] = unit_data
+	# data["units"] = unit_data
+	data["units"] = []
 	return data
 
 
