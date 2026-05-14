@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1jukp7vqhfuw" path="res://Scripts/tile.gd" id="1_xsjyq"]
 [ext_resource type="Texture2D" uid="uid://d1wblpyi5iarh" path="res://Assets/Images/Tiles/lawn2.png" id="2_rvq8p"]
+[ext_resource type="Script" uid="uid://dlupkdec4pwkt" path="res://Scripts/tile_sprite.gd" id="3_4kj4d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4kj4d"]
 size = Vector2(145, 100)
@@ -10,8 +11,9 @@ size = Vector2(145, 100)
 process_mode = 3
 script = ExtResource("1_xsjyq")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=554119502]
+[node name="TileSprite" type="Sprite2D" parent="." unique_id=554119502]
 texture = ExtResource("2_rvq8p")
+script = ExtResource("3_4kj4d")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=139935770]
 collision_layer = 4
@@ -20,6 +22,7 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1296939350]
 shape = SubResource("RectangleShape2D_4kj4d")
 
+[connection signal="change_texture" from="." to="TileSprite" method="_on_tile_change_texture"]
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -28,7 +28,7 @@ var occupying_unit = null
 @export var tile_type = TileTypes.NONE
 
 
-@onready var sprite = $Sprite2D
+@onready var sprite = $TileSprite
 @onready var area_2d = $Area2D
 
 
@@ -47,12 +47,14 @@ func SetCorrectTexture():
 		else:
 			texture = load("res://Assets/Images/Tiles/lawn2.png")
 	elif self.tile_type == TileTypes.STONE:
+		print("IWANNABESTONE")
 		texture = load("res://Assets/Images/Tiles/stone1.png")
 	pending_texture = texture
 	change_texture.emit(texture)
 
 
 func deploy(tile_type_, x, y, field_):
+	print(tile_type)
 	self.field = field_
 	self.grid_x = x
 	self.grid_y = y
@@ -63,7 +65,6 @@ func deploy(tile_type_, x, y, field_):
 
 func _ready() -> void:
 	sprite.texture = pending_texture
-	change_texture.connect(_on_change_texture)
 
 
 func _on_area_2d_mouse_entered() -> void:
@@ -104,7 +105,3 @@ func _on_unit_promoted(new_type):
 	var new_unit_data = GlobalUnitDatabase.units[new_type]
 	occupying_unit.queue_free()
 	spawn_unit(new_unit_data)
-
-
-func _on_change_texture(new_texture) -> void:
-	sprite.texture = new_texture

@@ -295,8 +295,10 @@ func _on_field_size_field_size_changed(new_x, new_y) -> void:
 func AdjustFieldSize(new_x, new_y):
 	
 	for child in [enemies, units, projectiles]:
-		child.position.x += (n_columns - new_x) * TILE_WIDTH / 2.0
-		child.position.y += (n_rows - new_y) * TILE_HEIGHT / 2.0
+		for child_child in child.get_children():
+			if child_child is Node2D:
+				child_child.position.x += (n_columns - new_x) * TILE_WIDTH / 2.0
+				child_child.position.y += (n_rows - new_y) * TILE_HEIGHT / 2.0
 	
 	n_columns = new_x
 	n_rows = new_y

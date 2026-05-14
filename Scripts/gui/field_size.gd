@@ -13,8 +13,8 @@ var y_value
 
 
 func _ready() -> void:
-	x.value = x_value
-	y.value = y_value
+	x.set_value_no_signal(x_value)
+	y.set_value_no_signal(y_value)
 
 
 func _on_level_serializer_field_data_extracted(field_data) -> void:
