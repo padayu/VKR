@@ -2,32 +2,80 @@
 
 [ext_resource type="Script" uid="uid://gev4ab856cam" path="res://Scripts/editor_level_choice.gd" id="1_eroni"]
 [ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/gui/level_select_file_dialog.gd" id="2_2e17m"]
+[ext_resource type="Texture2D" uid="uid://b0n0g5a8qctf3" path="res://Assets/Images/Decorations/Forest.png" id="2_nnore"]
+[ext_resource type="Texture2D" uid="uid://3xic4hvb8clo" path="res://Assets/Images/UI/Button3.png" id="3_nnore"]
+[ext_resource type="Texture2D" uid="uid://drejsbhl63b00" path="res://Assets/Images/UI/Button2.png" id="4_ixvh4"]
+[ext_resource type="Texture2D" uid="uid://ykvko1nyfhtv" path="res://Assets/Images/UI/Button2_pressed.png" id="5_b4enr"]
+[ext_resource type="Texture2D" uid="uid://demhmrunndwxh" path="res://Assets/Images/UI/Button2_hovered.png" id="6_nw4s3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nnore"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5igb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o7xl1"]
 
 [node name="EditorLevelChoice" type="Node2D" unique_id=83941129]
 script = ExtResource("1_eroni")
 
+[node name="BG" type="Sprite2D" parent="." unique_id=755687984]
+position = Vector2(960, 540)
+texture = ExtResource("2_nnore")
+
+[node name="LeftSign" type="Sprite2D" parent="." unique_id=1563937904]
+position = Vector2(648, 512)
+texture = ExtResource("3_nnore")
+
+[node name="RightSign" type="Sprite2D" parent="." unique_id=1788984259]
+position = Vector2(1208, 512)
+texture = ExtResource("3_nnore")
+flip_h = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1493934851]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1088237449]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -49.5
-offset_top = -33.0
-offset_right = 49.5
-offset_bottom = 33.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ChooseFile" type="Button" parent="CanvasLayer" unique_id=1206212160]
+offset_left = 480.0
+offset_top = 440.0
+offset_right = 851.0
+offset_bottom = 576.0
+theme_override_colors/font_focus_color = Color(5.2943826e-05, 0.9549591, 0.14804149, 1)
+theme_override_colors/font_pressed_color = Color(1.0829419e-06, 0.40581995, 0.034141067, 1)
+theme_override_colors/font_hover_color = Color(0, 0.95686275, 0.14901961, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.40392157, 0.03529412, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nnore")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b5igb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o7xl1")
+text = "ВЫБРАТЬ ФАЙЛ"
 
-[node name="ChooseFile" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1206212160]
-layout_mode = 2
-text = "Choose file"
+[node name="CreateNew" type="Button" parent="CanvasLayer" unique_id=84488404]
+offset_left = 1008.0
+offset_top = 440.0
+offset_right = 1379.0
+offset_bottom = 576.0
+theme_override_colors/font_focus_color = Color(5.2943826e-05, 0.9549591, 0.14804149, 1)
+theme_override_colors/font_pressed_color = Color(1.0829419e-06, 0.40581995, 0.034141067, 1)
+theme_override_colors/font_hover_color = Color(0, 0.95686275, 0.14901961, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.40392157, 0.03529412, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nnore")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b5igb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o7xl1")
+text = "СОЗДАТЬ НОВЫЙ"
 
-[node name="CreateNew" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=376554810]
-layout_mode = 2
-text = "Create New"
+[node name="QuitButton" type="TextureButton" parent="CanvasLayer" unique_id=2076824092]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 100.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_ixvh4")
+texture_pressed = ExtResource("5_b4enr")
+texture_hover = ExtResource("6_nw4s3")
+texture_disabled = ExtResource("4_ixvh4")
+texture_focused = ExtResource("6_nw4s3")
 
 [node name="FileDialogOpen" type="FileDialog" parent="." unique_id=730553095]
 title = "Open a File"
@@ -43,7 +91,8 @@ access = 2
 filters = PackedStringArray("*.json")
 script = ExtResource("2_2e17m")
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/ChooseFile" to="." method="_on_choose_file_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/CreateNew" to="." method="_on_create_new_pressed"]
+[connection signal="pressed" from="CanvasLayer/ChooseFile" to="." method="_on_choose_file_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateNew" to="." method="_on_create_new_pressed"]
+[connection signal="pressed" from="CanvasLayer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="file_selected" from="FileDialogOpen" to="." method="_on_file_dialog_open_file_selected"]
 [connection signal="file_selected" from="FileDialogCreate" to="." method="_on_file_dialog_create_file_selected"]

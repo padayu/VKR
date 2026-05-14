@@ -16,6 +16,7 @@ enum state {
 	ATTACKING, 
 	RAGING_DEFAULT,
 	RAGING_ATTACKING,
+	RECOIL,
 	}
 
 
@@ -27,6 +28,7 @@ var health: int
 func _ready() -> void:
 	current_state = state.DEFAULT
 	health_changed.connect(_on_health_changed)
+	state_changed.connect(_on_state_changed)
 	detectable_area.taken_melee_hit.connect(_on_detectable_area_taken_melee_hit)
 	detectable_area.hit_by_projectile.connect(_on_detectable_area_hit_by_projectile)
 	detectable_area.taken_knockback.connect(_on_detectable_area_taken_knockback)
@@ -80,3 +82,7 @@ func _on_detectable_area_taken_melee_hit(damage) -> void:
 
 func _on_detectable_area_taken_knockback(amount) -> void:
 	take_knockback(amount)
+
+
+func _on_state_changed(new_state):
+	pass

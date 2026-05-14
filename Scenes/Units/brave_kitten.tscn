@@ -1,22 +1,139 @@
 [gd_scene format=3 uid="uid://bkewg5g5qxwm4"]
 
 [ext_resource type="Script" uid="uid://1d8uj8tt55s6" path="res://Scripts/units/brave_kitten.gd" id="1_ms42d"]
-[ext_resource type="Texture2D" uid="uid://o2p33ew5siak" path="res://Assets/Images/Units/Kitten.png" id="2_iejmr"]
+[ext_resource type="Texture2D" uid="uid://b6ad57luyfgek" path="res://Assets/Images/Units/BaseCatAnim.png" id="2_sg84m"]
+[ext_resource type="Texture2D" uid="uid://dsph8oy2ato0h" path="res://Assets/Images/Units/SlingshotAnim.png" id="3_gyjog"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_iejmr"]
 [ext_resource type="Script" uid="uid://bl1lrf1eu57s2" path="res://Scripts/gui/upgrade_button.gd" id="4_m002s"]
 [ext_resource type="Script" uid="uid://bv4ngw4vnip0j" path="res://Scripts/gui/upgrades.gd" id="4_sg84m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg84m"]
+atlas = ExtResource("2_sg84m")
+region = Rect2(0, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyjog"]
+atlas = ExtResource("2_sg84m")
+region = Rect2(140, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1lbc"]
+atlas = ExtResource("2_sg84m")
+region = Rect2(280, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdrw8"]
+atlas = ExtResource("2_sg84m")
+region = Rect2(140, 100, 140, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3prim"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg84m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1lbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg84m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1lbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg84m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1lbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdrw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg84m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdrw8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1lbc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyjog")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3prim"]
+atlas = ExtResource("3_gyjog")
+region = Rect2(70, 0, 70, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_see88"]
+atlas = ExtResource("3_gyjog")
+region = Rect2(0, 0, 70, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itctd"]
+atlas = ExtResource("3_gyjog")
+region = Rect2(70, 0, 70, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n5udh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3prim")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_see88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itctd")
+}],
+"loop": false,
+"name": &"reloading",
+"speed": 1.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ms42d"]
 size = Vector2(842, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iejmr"]
-size = Vector2(80, 32)
+size = Vector2(80, 64)
 
 [node name="BraveKitten" type="Node2D" unique_id=795442080]
 script = ExtResource("1_ms42d")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1508710340]
-texture = ExtResource("2_iejmr")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1962998222]
+sprite_frames = SubResource("SpriteFrames_3prim")
+autoplay = "default"
+frame_progress = 0.0032859908
+
+[node name="Slingshot" type="AnimatedSprite2D" parent="." unique_id=248266281]
+position = Vector2(0, 16)
+sprite_frames = SubResource("SpriteFrames_n5udh")
+animation = &"reloading"
+autoplay = "default"
+frame = 1
+frame_progress = 1.0
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=436343764]
 collision_layer = 0
@@ -31,7 +148,7 @@ collision_mask = 0
 script = ExtResource("3_iejmr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=767084958]
-position = Vector2(0, 8)
+position = Vector2(24, 8)
 shape = SubResource("RectangleShape2D_iejmr")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=7283974]

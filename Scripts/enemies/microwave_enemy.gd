@@ -2,11 +2,15 @@ extends Enemy
 
 
 @onready var explosion_area = $ExplosionArea
+@onready var sprite = $Sprite
+@onready var sound = $Sound
+@onready var explosion: AnimatedSprite2D = $Explosion
 
 
 
-const BASE_SPEED = 20
+const BASE_SPEED = 40
 const BASE_MAX_HEALTH = 80
+const BASE_DAMAGE = 100
 const BASE_DIRECTION = Vector2(-1, 0)
 
 
@@ -17,6 +21,7 @@ func _ready() -> void:
 	super._ready()
 	max_health = BASE_MAX_HEALTH
 	health = max_health
+	explosion.visible = false
 
 
 func _process(delta: float) -> void:
@@ -39,7 +44,12 @@ func move_left(delta: float):
 
 
 func attack():
-	die()
+	sprite.visible = false
+	explosion.visible = true
+	explosion.play("default")
+	get_parent().Explode()
+	for unit_in_range in explosion_area.get_overlapping_areas():
+		unit_in_range.take_melee_hit(BASE_DAMAGE)
 
 
 func _on_attack_timer_timeout() -> void:
@@ -47,19 +57,15 @@ func _on_attack_timer_timeout() -> void:
 		attack()
 
 
-func _on_unit_detection_area_area_entered(area: Area2D) -> void:
+func _on_unit_detection_area_area_entered(_area: Area2D) -> void:
 	detected_units += 1
 	if detected_units == 1:
 		change_state(state.ATTACKING)
 
 
-func _on_unit_detection_area_area_exited(area: Area2D) -> void:
-	detected_units -= 1
-	if detected_units == 0:
-		change_state(state.DEFAULT)
-
-
 func die():
-	for unit_in_range in explosion_area.get_overlapping_areas():
-		unit_in_range.take_melee_hit(100)
+	change_state(state.ATTACKING)
+
+
+func _on_explosion_animation_finished() -> void:
 	super.die()

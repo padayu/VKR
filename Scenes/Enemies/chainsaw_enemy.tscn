@@ -1,29 +1,131 @@
 [gd_scene format=3 uid="uid://cgdxg83r4dm0r"]
 
 [ext_resource type="Script" uid="uid://dufm5qdtlthvu" path="res://Scripts/enemies/chainsaw_enemy.gd" id="1_6ytag"]
-[ext_resource type="Texture2D" uid="uid://dttuf2h3eii4w" path="res://Assets/Images/Enemies/Chainsaw.png" id="2_0queq"]
+[ext_resource type="Texture2D" uid="uid://bjks4gyrmb33g" path="res://Assets/Images/Enemies/ChainsawAnim.png" id="2_6ytag"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_6ytag"]
+[ext_resource type="AudioStream" uid="uid://ceks832644ema" path="res://Assets/SFX/Chainsaw.mp3" id="4_0queq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpt1c"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(660, 0, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wndwx"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(880, 0, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0queq"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(0, 0, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ye7j2"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(220, 0, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mys8u"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(440, 0, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72qbl"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(660, 350, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilslt"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(880, 350, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ytag"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(0, 350, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_231us"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(220, 350, 220, 350)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu1r6"]
+atlas = ExtResource("2_6ytag")
+region = Rect2(440, 350, 220, 350)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_231us"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpt1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wndwx")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0queq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye7j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mys8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ye7j2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72qbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilslt")
+}],
+"loop": true,
+"name": &"raging_attacking",
+"speed": 40.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ytag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_231us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu1r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_231us")
+}],
+"loop": true,
+"name": &"raging_default",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mys8u"]
-size = Vector2(56, 20)
+size = Vector2(104, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_231us"]
-size = Vector2(96, 32)
+size = Vector2(112, 32)
 
 [node name="ChainsawEnemy" type="Node2D" unique_id=1858881643]
 script = ExtResource("1_6ytag")
 metadata/_custom_type_script = "uid://cfdv2746dxo5o"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=865865274]
-position = Vector2(-16, -8.000002)
-scale = Vector2(0.2790476, 0.22888887)
-texture = ExtResource("2_0queq")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1629027071]
+position = Vector2(-24, -136)
+sprite_frames = SubResource("SpriteFrames_231us")
+animation = &"raging_attacking"
+autoplay = "default"
+frame_progress = 0.73717767
 
 [node name="UnitDetectionArea" type="Area2D" parent="." unique_id=511656962]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitDetectionArea" unique_id=1050705473]
-position = Vector2(-52, 0)
+position = Vector2(-76, 0)
 shape = SubResource("RectangleShape2D_mys8u")
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=546777493]
@@ -37,6 +139,9 @@ shape = SubResource("RectangleShape2D_231us")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=565828348]
 wait_time = 0.2
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=115715366]
+stream = ExtResource("4_0queq")
 
 [connection signal="area_entered" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_entered"]
 [connection signal="area_exited" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_exited"]

@@ -10,7 +10,6 @@ size = Vector2(32, 32)
 script = ExtResource("1_t0g33")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1184817650]
-scale = Vector2(0.45, 0.45)
 texture = ExtResource("2_t0o74")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=2043312984]

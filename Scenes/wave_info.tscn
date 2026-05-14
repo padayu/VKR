@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://ck2vyasgios70" path="res://Scripts/gui/number_of_enemies_spin_box.gd" id="3_hm53f"]
 
 [node name="WaveInfo" type="Control" unique_id=762003477]
-custom_minimum_size = Vector2(300, 40)
+custom_minimum_size = Vector2(400, 40)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_vertical = 2
 
 [node name="TimerLabel" type="Label" parent="HBoxContainer" unique_id=1810407350]
 layout_mode = 2
-text = "Timer (sec):"
+text = "Таймер (сек.):"
 
 [node name="TimerSpinBox" type="SpinBox" parent="HBoxContainer" unique_id=1779079858]
 layout_mode = 2
@@ -38,7 +38,7 @@ script = ExtResource("3_d64e0")
 
 [node name="NumberOfEnemiesLabel" type="Label" parent="HBoxContainer" unique_id=1509624422]
 layout_mode = 2
-text = "Number of enemies:"
+text = "Количество врагов:"
 
 [node name="NumberOfEnemiesSpinBox" type="SpinBox" parent="HBoxContainer" unique_id=228786078]
 layout_mode = 2
@@ -46,7 +46,7 @@ script = ExtResource("3_hm53f")
 
 [node name="DeleteButton" type="Button" parent="HBoxContainer" unique_id=225799183]
 layout_mode = 2
-text = "Delete"
+text = "Удалить"
 
 [connection signal="set_enemy_type_value" from="." to="HBoxContainer/EnemyTypeDropdown" method="_on_wave_info_set_enemy_type_value"]
 [connection signal="set_number_of_enemies_value" from="." to="HBoxContainer/NumberOfEnemiesSpinBox" method="_on_wave_info_set_number_of_enemies_value"]

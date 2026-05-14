@@ -1,9 +1,6 @@
 extends OptionButton
 
 
-signal selected_item_chosen
-
-
 var enemy_names = {}
 
 
@@ -13,7 +10,8 @@ func _ready() -> void:
 
 
 func _on_wave_info_set_enemy_type_value(type_to_set) -> void:
-	UpdateEnemyTypes()
+	if item_count == 0:
+		UpdateEnemyTypes()
 	var matching_name = null
 	if type_to_set in enemy_names:
 		matching_name = enemy_names[type_to_set]

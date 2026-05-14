@@ -4,7 +4,7 @@ extends Node2D
 @onready var hitbox = $Hitbox
 
 
-const BASE_DAMAGE = 24
+const BASE_DAMAGE = 15
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

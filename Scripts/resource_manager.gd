@@ -4,14 +4,11 @@ extends Node
 const DEFAULT_MANA_PRODUCTION_RATE = 5
 
 
-signal mana_value_changed
-
-
 var mana = 0:
 	set(value):
 		mana = value
-		mana_value_changed.emit(value)
 		GlobalEventBus.mana_value_changed.emit(value)
+
 
 @onready var timer = $Timer
 

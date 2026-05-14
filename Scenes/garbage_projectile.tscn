@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cqsljakn1htwk"]
+
+[ext_resource type="Script" uid="uid://c4diwr4x6s4lf" path="res://Scripts/garbage_projectile.gd" id="1_8xcek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8xcek"]
+size = Vector2(32, 32)
+
+[node name="BreadProjectile" type="Node2D" unique_id=1999247085]
+script = ExtResource("1_8xcek")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=895341912]
+position = Vector2(-9.536743e-07, 0)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=424094049]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=867326648]
+shape = SubResource("RectangleShape2D_8xcek")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

@@ -1,7 +1,8 @@
 extends Unit
 
 
-@onready var attack_timer = $AttackTimer
+@onready var attack_timer: Timer = $AttackTimer
+@onready var slingshot: AnimatedSprite2D = $Slingshot
 @onready var projectile_scene = preload("res://Scenes/rock_projectile.tscn")
 
 
@@ -36,7 +37,9 @@ func change_state(new_state: state):
 func attack():
 	var projectile = projectile_scene.instantiate()
 	get_parent().get_parent().AddProjectile(projectile)
-	projectile.position = position
+	slingshot.stop()
+	slingshot.play("reloading")
+	projectile.position = position + Vector2(-24, 15)
 
 
 func _on_attack_timer_timeout():

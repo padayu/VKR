@@ -1,6 +1,10 @@
 extends Node2D
 
 
+func _ready() -> void:
+	get_tree().paused = false
+
+
 func _on_select_file_pressed():
 	GlobalLevelData.editor_mode = false
 	$FileDialog.open_file_picker()

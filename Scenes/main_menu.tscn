@@ -1,138 +1,127 @@
 [gd_scene format=3 uid="uid://bhfx41rnyv7g7"]
 
 [ext_resource type="Script" uid="uid://bsyo8vwjaa8m4" path="res://Scripts/main_menu.gd" id="1_28flt"]
-[ext_resource type="Texture2D" uid="uid://dlylss0mxigp7" path="res://Assets/Images/UI/Button1.png" id="2_1ehe0"]
 [ext_resource type="Script" uid="uid://kffd755wuyls" path="res://Scripts/gui/level_select_file_dialog.gd" id="2_48xlc"]
+[ext_resource type="Texture2D" uid="uid://dp7fsw1a67tdk" path="res://Assets/Images/Decorations/Duplo.png" id="2_opfnp"]
+[ext_resource type="Texture2D" uid="uid://drejsbhl63b00" path="res://Assets/Images/UI/Button2.png" id="3_opfnp"]
+[ext_resource type="Texture2D" uid="uid://ykvko1nyfhtv" path="res://Assets/Images/UI/Button2_pressed.png" id="4_cp0ys"]
+[ext_resource type="Texture2D" uid="uid://demhmrunndwxh" path="res://Assets/Images/UI/Button2_hovered.png" id="5_yhxw7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cp0ys"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yhxw7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_trj04"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_16hvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr1f0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1dhk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5egv6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtepg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8dnnj"]
 
 [node name="MainMenu" type="Node2D" unique_id=2109787740]
 script = ExtResource("1_28flt")
 
+[node name="Background" type="Sprite2D" parent="." unique_id=1530684135]
+texture = ExtResource("2_opfnp")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2139943560]
 
-[node name="SelectFileButton" type="TextureButton" parent="." unique_id=1988035587]
+[node name="CampaignButton" type="Button" parent="." unique_id=2164434]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -60.0
-offset_right = 200.0
-offset_bottom = 60.0
+offset_left = -472.0
+offset_top = -160.0
+offset_right = -51.0
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_1ehe0")
-texture_pressed = ExtResource("2_1ehe0")
-texture_hover = ExtResource("2_1ehe0")
-texture_disabled = ExtResource("2_1ehe0")
-texture_focused = ExtResource("2_1ehe0")
-stretch_mode = 0
+theme_override_colors/font_color = Color(0.9543231, 0.8964514, 2.3102762e-06, 1)
+theme_override_colors/font_focus_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_colors/font_hover_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cp0ys")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yhxw7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_trj04")
+text = "У Р О В Н И"
 
-[node name="Label" type="Label" parent="SelectFileButton" unique_id=1213840803]
-layout_mode = 1
+[node name="SelectFileButton" type="Button" parent="." unique_id=1275683071]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -11.5
-offset_right = 44.0
-offset_bottom = 11.5
+offset_left = -496.0
+offset_right = 9.0
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Choose File"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_colors/font_color = Color(0.9529412, 0.8980392, 0, 1)
+theme_override_colors/font_focus_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_colors/font_hover_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxEmpty_16hvj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vr1f0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_t1dhk")
+text = "З А Г Р У З И Т Ь"
 
-[node name="CampaignButton" type="TextureButton" parent="." unique_id=190702234]
+[node name="EditorButton" type="Button" parent="." unique_id=950902374]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -200.0
-offset_right = 200.0
-offset_bottom = -80.0
+offset_left = -520.0
+offset_top = 192.0
+offset_right = -65.0
+offset_bottom = 304.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("2_1ehe0")
-texture_pressed = ExtResource("2_1ehe0")
-texture_hover = ExtResource("2_1ehe0")
-texture_disabled = ExtResource("2_1ehe0")
-texture_focused = ExtResource("2_1ehe0")
-stretch_mode = 0
+rotation = 0.14206189
+theme_override_colors/font_color = Color(0.9529412, 0.8980392, 0, 1)
+theme_override_colors/font_focus_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_colors/font_hover_color = Color(0.98039216, 0.627451, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.47843137, 0.29803923, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 65
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5egv6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vtepg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8dnnj")
+text = "Р Е Д А К Т О Р"
 
-[node name="Label" type="Label" parent="CampaignButton" unique_id=1682070250]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -11.5
-offset_right = 44.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Campaign"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EditorButton" type="TextureButton" parent="." unique_id=2138722462]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 80.0
-offset_right = 200.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-texture_normal = ExtResource("2_1ehe0")
-texture_pressed = ExtResource("2_1ehe0")
-texture_hover = ExtResource("2_1ehe0")
-texture_disabled = ExtResource("2_1ehe0")
-texture_focused = ExtResource("2_1ehe0")
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="EditorButton" unique_id=205552454]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = -11.5
-offset_right = 44.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "Level Editor"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="QuitButton" type="Button" parent="." unique_id=1485372682]
+[node name="QuitButton" type="TextureButton" parent="." unique_id=691176615]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = 320.0
-offset_right = 56.0
-offset_bottom = 376.0
+offset_left = 568.0
+offset_top = 352.0
+offset_right = 768.0
+offset_bottom = 452.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Quit"
+texture_normal = ExtResource("3_opfnp")
+texture_pressed = ExtResource("4_cp0ys")
+texture_hover = ExtResource("5_yhxw7")
+texture_disabled = ExtResource("3_opfnp")
+texture_focused = ExtResource("5_yhxw7")
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=1880376063]
 title = "Open a File"
@@ -142,8 +131,8 @@ access = 2
 filters = PackedStringArray("*.json")
 script = ExtResource("2_48xlc")
 
-[connection signal="pressed" from="SelectFileButton" to="." method="_on_select_file_pressed"]
 [connection signal="pressed" from="CampaignButton" to="." method="_on_campaign_button_pressed"]
+[connection signal="pressed" from="SelectFileButton" to="." method="_on_select_file_pressed"]
 [connection signal="pressed" from="EditorButton" to="." method="_on_editor_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

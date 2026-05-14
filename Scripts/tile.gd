@@ -8,6 +8,7 @@ enum TileTypes {NONE, LAWN, STONE}
 signal hovered
 signal unhovered
 signal clicked
+signal change_texture
 
 
 var TypeNames = {
@@ -27,7 +28,7 @@ var occupying_unit = null
 @export var tile_type = TileTypes.NONE
 
 
-@onready var sprite = $Area2D/Sprite
+@onready var sprite = $Sprite2D
 @onready var area_2d = $Area2D
 
 
@@ -38,11 +39,6 @@ func get_tile_type_string():
 	return TypeNamesRevarse[tile_type]
 
 
-# save correct image to self.pending_texture
-# to apply self.pending_texture to the sprite, use UpdateSprite
-#--------EXPLANATION-----------------
-# these two methods are separated because the sprite nodemay not exist yet
-# when the texture is first decided
 func SetCorrectTexture():
 	var texture
 	if self.tile_type == TileTypes.LAWN:
@@ -52,7 +48,8 @@ func SetCorrectTexture():
 			texture = load("res://Assets/Images/Tiles/lawn2.png")
 	elif self.tile_type == TileTypes.STONE:
 		texture = load("res://Assets/Images/Tiles/stone1.png")
-	self.pending_texture = texture
+	pending_texture = texture
+	change_texture.emit(texture)
 
 
 func deploy(tile_type_, x, y, field_):
@@ -65,7 +62,8 @@ func deploy(tile_type_, x, y, field_):
 
 
 func _ready() -> void:
-	UpdateSprite()
+	sprite.texture = pending_texture
+	change_texture.connect(_on_change_texture)
 
 
 func _on_area_2d_mouse_entered() -> void:
@@ -84,24 +82,29 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 
 func spawn_unit(unit_data):
 	var unit = load(unit_data["path"]).instantiate()
-	get_parent().add_unit(unit)
+	get_parent().get_parent().add_unit(unit)
 	unit.position = position
 	self.occupying_unit = unit
 	unit.set_occupied_tile(self)
 	unit.promoted.connect(_on_unit_promoted)
 
 
-func UpdateSprite():
-	sprite.texture = pending_texture
-
-
 func change_type(new_type: String):
 	tile_type = TypeNames[new_type]
 	SetCorrectTexture()
-	UpdateSprite()
+
+
+func delete():
+	if occupying_unit != null:
+		occupying_unit.queue_free()
+	queue_free()
 
 
 func _on_unit_promoted(new_type):
 	var new_unit_data = GlobalUnitDatabase.units[new_type]
 	occupying_unit.queue_free()
 	spawn_unit(new_unit_data)
+
+
+func _on_change_texture(new_texture) -> void:
+	sprite.texture = new_texture

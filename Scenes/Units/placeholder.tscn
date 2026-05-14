@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://du47r3af81ui5"]
 
 [ext_resource type="Texture2D" uid="uid://dfoykrqv7hhg4" path="res://Assets/Images/Units/Placeholder.png" id="1_akisb"]
-[ext_resource type="Script" uid="uid://d2druhdrfqe43" path="res://Scripts/gui/unit.gd" id="1_ysllt"]
+[ext_resource type="Script" uid="uid://d2druhdrfqe43" path="res://Scripts/units/unit.gd" id="1_ysllt"]
 
 [node name="Placeholder" type="Node2D" unique_id=1799240731]
 script = ExtResource("1_ysllt")

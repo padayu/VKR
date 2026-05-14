@@ -1,29 +1,78 @@
 [gd_scene format=3 uid="uid://damkm54dp5wlm"]
 
 [ext_resource type="Script" uid="uid://cvawubc2kdr1w" path="res://Scripts/enemies/toaster_enemy.gd" id="1_v6o27"]
-[ext_resource type="Texture2D" uid="uid://behvw2n4tyf47" path="res://Assets/Images/Enemies/Toaster.png" id="2_0kukf"]
+[ext_resource type="Texture2D" uid="uid://c32fn0v0wawbw" path="res://Assets/Images/Enemies/BinAnim.png" id="2_0kukf"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_0kukf"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kukf"]
+atlas = ExtResource("2_0kukf")
+region = Rect2(0, 180, 250, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmrck"]
+atlas = ExtResource("2_0kukf")
+region = Rect2(0, 0, 250, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5eap1"]
+atlas = ExtResource("2_0kukf")
+region = Rect2(250, 0, 250, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omq8q"]
+atlas = ExtResource("2_0kukf")
+region = Rect2(500, 0, 250, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_868km"]
+atlas = ExtResource("2_0kukf")
+region = Rect2(750, 0, 250, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sc3dh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kukf")
+}],
+"loop": true,
+"name": &"attacking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmrck")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5eap1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omq8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_868km")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5eap1"]
-size = Vector2(248, 20)
+size = Vector2(264, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omq8q"]
-size = Vector2(96, 40)
+size = Vector2(112, 40)
 
 [node name="ToasterEnemy" type="Node2D" unique_id=281785811]
 script = ExtResource("1_v6o27")
 metadata/_custom_type_script = "uid://cfdv2746dxo5o"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2031774820]
-position = Vector2(-8.000006, -9.536743e-07)
-scale = Vector2(0.24380954, 0.16)
-texture = ExtResource("2_0kukf")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1524301071]
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_sc3dh")
+animation = &"attacking"
+autoplay = "default"
 
 [node name="UnitDetectionArea" type="Area2D" parent="." unique_id=830547054]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitDetectionArea" unique_id=128923519]
-position = Vector2(-76, 0)
+position = Vector2(-84, 0)
 shape = SubResource("RectangleShape2D_5eap1")
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=403923354]
@@ -32,7 +81,7 @@ collision_mask = 0
 script = ExtResource("3_0kukf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=1475973353]
-position = Vector2(-8, -4)
+position = Vector2(16, -4)
 shape = SubResource("RectangleShape2D_omq8q")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1462942139]

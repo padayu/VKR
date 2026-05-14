@@ -8,6 +8,7 @@ const BASE_DAMAGE = 5
 const BASE_SPEED = 200
 const BASE_DIRECTION = Vector2(1, 0)
 const MAX_LIFETIME = 20
+const BASE_ROTATION_SPEED = 5
 
 
 var current_direction = BASE_DIRECTION
@@ -19,6 +20,7 @@ func _process(delta: float) -> void:
 	if lifetime > MAX_LIFETIME:
 		queue_free()
 	position += current_direction * BASE_SPEED * delta
+	rotate(BASE_ROTATION_SPEED * delta)
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

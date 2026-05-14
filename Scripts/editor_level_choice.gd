@@ -54,3 +54,7 @@ func _on_file_dialog_create_file_selected(path: String) -> void:
 	
 	GlobalLevelData.path = path
 	get_tree().change_scene_to_file("res://Scenes/level.tscn")
+
+
+func _on_quit_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

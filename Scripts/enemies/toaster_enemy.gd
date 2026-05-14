@@ -2,7 +2,8 @@ extends Enemy
 
 
 @onready var attack_timer = $AttackTimer
-@onready var projectile_scene = preload("res://Scenes/bread_projectile.tscn")
+@onready var sprite = $Sprite
+@onready var projectile_scene = preload("res://Scenes/garbage_projectile.tscn")
 
 
 const BASE_SPEED = 30
@@ -29,9 +30,11 @@ func change_state(new_state: state):
 	super.change_state(new_state)
 	match new_state:
 		state.ATTACKING:
+			sprite.play("attacking")
 			attack()
 			attack_timer.start()
 		state.DEFAULT:
+			sprite.play("default")
 			attack_timer.stop()
 
 
@@ -41,8 +44,9 @@ func move_left(delta: float):
 
 func attack():
 	var projectile = projectile_scene.instantiate()
-	get_parent().AddProjectile(projectile)
+	get_parent().get_parent().AddProjectile(projectile)
 	projectile.position = position
+	projectile.position.y -= 20
 
 
 func _on_attack_timer_timeout() -> void:
@@ -50,13 +54,13 @@ func _on_attack_timer_timeout() -> void:
 		attack()
 
 
-func _on_unit_detection_area_area_entered(area: Area2D) -> void:
+func _on_unit_detection_area_area_entered(_area: Area2D) -> void:
 	detected_units += 1
 	if detected_units == 1:
 		change_state(state.ATTACKING)
 
 
-func _on_unit_detection_area_area_exited(area: Area2D) -> void:
+func _on_unit_detection_area_area_exited(_area: Area2D) -> void:
 	detected_units -= 1
 	if detected_units == 0:
 		change_state(state.DEFAULT)

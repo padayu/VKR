@@ -1,21 +1,135 @@
 [gd_scene format=3 uid="uid://dcjkcgnp6otu8"]
 
 [ext_resource type="Script" uid="uid://bl47gq2jk11nf" path="res://Scripts/units/ninja_kitten.gd" id="1_mnu4d"]
-[ext_resource type="Texture2D" uid="uid://rh8wr1w5s1wd" path="res://Assets/Images/Units/KittenNinja.png" id="2_ek8vk"]
+[ext_resource type="Texture2D" uid="uid://cycbay54d8yrv" path="res://Assets/Images/Units/NinjaCatAnim.png" id="2_mnu4d"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_dylwu"]
+[ext_resource type="Texture2D" uid="uid://b481o2hntxv4c" path="res://Assets/Images/Projectiles/ShurikenAnim.png" id="3_ek8vk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ek8vk"]
+atlas = ExtResource("2_mnu4d")
+region = Rect2(0, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dylwu"]
+atlas = ExtResource("2_mnu4d")
+region = Rect2(140, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffxkd"]
+atlas = ExtResource("2_mnu4d")
+region = Rect2(280, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q27ln"]
+atlas = ExtResource("2_mnu4d")
+region = Rect2(140, 100, 140, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6to2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek8vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffxkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek8vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffxkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek8vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffxkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q27ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ek8vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q27ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffxkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dylwu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6to2"]
+atlas = ExtResource("3_ek8vk")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32fvc"]
+atlas = ExtResource("3_ek8vk")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4l00d"]
+atlas = ExtResource("3_ek8vk")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q5k0t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6to2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32fvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4l00d")
+}],
+"loop": false,
+"name": &"reloading",
+"speed": 1.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kxtrr"]
 size = Vector2(842, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oinpw"]
-size = Vector2(80, 32)
+size = Vector2(80, 64)
 
 [node name="NinjaKittenUnit" type="Node2D" unique_id=804587915]
 script = ExtResource("1_mnu4d")
 metadata/_custom_type_script = "uid://d2druhdrfqe43"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=390821250]
-texture = ExtResource("2_ek8vk")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1602009726]
+sprite_frames = SubResource("SpriteFrames_d6to2")
+autoplay = "default"
+frame_progress = 0.948276
+
+[node name="Shuriken" type="AnimatedSprite2D" parent="." unique_id=743091822]
+position = Vector2(8, 24)
+sprite_frames = SubResource("SpriteFrames_q5k0t")
+autoplay = "default"
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=676265706]
 collision_layer = 0
@@ -30,7 +144,7 @@ collision_mask = 0
 script = ExtResource("3_dylwu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=1252281239]
-position = Vector2(0, 8)
+position = Vector2(24, 8)
 shape = SubResource("RectangleShape2D_oinpw")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1241222237]

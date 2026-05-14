@@ -1,23 +1,48 @@
 [gd_scene format=3 uid="uid://ch4xtpv8u3vgg"]
 
 [ext_resource type="Script" uid="uid://cc75varrvpey0" path="res://Scripts/moon_projectile.gd" id="1_5vobi"]
-[ext_resource type="Texture2D" uid="uid://7kwbyp0w68tb" path="res://Assets/Images/Projectiles/Moon.png" id="2_juvee"]
+[ext_resource type="Texture2D" uid="uid://bj7gl5v3m2p2e" path="res://Assets/Images/Projectiles/FlyAnim.png" id="2_juvee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05py6"]
+atlas = ExtResource("2_juvee")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aio2o"]
+atlas = ExtResource("2_juvee")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sdg8k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05py6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aio2o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_05py6"]
-radius = 16.0
+radius = 8.0
 
 [node name="MoonProjectile" type="Node2D" unique_id=1288464267]
 script = ExtResource("1_5vobi")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1353506782]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1147136021]
 scale = Vector2(0.45, 0.45)
-texture = ExtResource("2_juvee")
+sprite_frames = SubResource("SpriteFrames_sdg8k")
+autoplay = "default"
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1465053707]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1215872705]
+position = Vector2(0, 2)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_05py6")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

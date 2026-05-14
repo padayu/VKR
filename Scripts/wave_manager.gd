@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	manage_timed_waves()
 
 
-func _on_level_loader_wave_data_extracted(wave_data) -> void:
+func _on_level_loader_wave_data_extracted(wave_data) -> void: 
 	var timed_wave_data = wave_data["timed_waves"]
 	timed_waves = timed_wave_data
 	for enemy in GlobalEnemyDatabase.enemies:

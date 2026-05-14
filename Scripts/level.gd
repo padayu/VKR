@@ -1,10 +1,12 @@
 extends Node2D
 
 
+signal got_new_camera_zoom
+
+
 var camera_zoom: Vector2
 
-@onready var level_loader = $LevelLoader
-@onready var wave_scheduler = $WaveScheduler
+
 @onready var game_field = $GameField
 @onready var camera: Camera2D = $Camera
 @onready var end_level_panel = $GameGUI/EndLevelPanel
@@ -14,10 +16,12 @@ var camera_zoom: Vector2
 
 func SetCameraZoom(zoom: Vector2):
 	camera_zoom = zoom
+	got_new_camera_zoom.emit(zoom)
 
 
 func _ready() -> void:
 	camera.zoom = camera_zoom
+	got_new_camera_zoom.connect(_on_got_new_camera_zoom)
 
 
 func _on_game_field_all_enemies_eliminated() -> void:
@@ -42,7 +46,7 @@ func _on_back_to_menu_pressed() -> void:
 	go_back_to_main_menu()
 
 
-func _on_field_border_area_entered(area) -> void:
+func _on_field_border_area_entered(_area) -> void:
 	lose()
 
 
@@ -52,3 +56,7 @@ func _on_pause_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	go_back_to_main_menu()
+
+
+func _on_got_new_camera_zoom(new_zoom):
+	camera.zoom = new_zoom

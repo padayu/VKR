@@ -10,6 +10,10 @@ var unit_card_scene = preload("res://Scenes/unit_card.tscn")
 var unit_cards: Array[Button] = []
 
 
+func _ready() -> void:
+	GlobalEventBus.mana_value_changed.connect(_on_mana_value_changed)
+
+
 func _on_level_loader_generate_unit_loadout(units_data) -> void:
 	for unit in units_data:
 		var card = generate_unit_card(unit)
@@ -35,6 +39,6 @@ func _on_unit_card_toggled(toggled_on, toggled_card):
 		selected_unit_card.emit(null)
 
 
-func _on_resource_manager_mana_value_changed(mana) -> void:
+func _on_mana_value_changed(mana) -> void:
 	for unit_card in unit_cards:
 		unit_card.update_availability(mana)

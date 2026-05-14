@@ -5,8 +5,9 @@ extends Node2D
 
 
 const BASE_DAMAGE = 3
-const BASE_SPEED = 140
+const BASE_SPEED = 200
 const BASE_DIRECTION = Vector2(1, 0)
+const BASE_ROTATION_SPEED = 1.0
 const MAX_LIFETIME = 20
 
 
@@ -18,6 +19,7 @@ func _process(delta: float) -> void:
 	if lifetime > MAX_LIFETIME:
 		queue_free()
 	position += BASE_DIRECTION * BASE_SPEED * delta
+	rotate(BASE_ROTATION_SPEED * delta)
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

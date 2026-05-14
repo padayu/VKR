@@ -1,14 +1,81 @@
 [gd_scene format=3 uid="uid://dyrvmgerxbu8d"]
 
 [ext_resource type="Script" uid="uid://qs8ltvpe5qll" path="res://Scripts/enemies/microwave_enemy.gd" id="1_s326k"]
-[ext_resource type="Texture2D" uid="uid://cpkhonr0iha8w" path="res://Assets/Images/Enemies/Microwave.png" id="2_j01mm"]
+[ext_resource type="Texture2D" uid="uid://gnu2nf40v6ap" path="res://Assets/Images/Enemies/BombAnim.png" id="2_s326k"]
+[ext_resource type="Texture2D" uid="uid://cslev0rcwnnb6" path="res://Assets/Images/Effects/Explosion.png" id="3_j01mm"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_s326k"]
+[ext_resource type="AudioStream" uid="uid://bs7un0bgats3w" path="res://Assets/SFX/Helicopter.mp3" id="5_lkele"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j01mm"]
+atlas = ExtResource("2_s326k")
+region = Rect2(0, 0, 150, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkele"]
+atlas = ExtResource("2_s326k")
+region = Rect2(150, 0, 150, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8207"]
+atlas = ExtResource("2_s326k")
+region = Rect2(300, 0, 150, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72k0g"]
+atlas = ExtResource("2_s326k")
+region = Rect2(450, 0, 150, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afryd"]
+atlas = ExtResource("2_s326k")
+region = Rect2(600, 0, 150, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g1rv"]
+atlas = ExtResource("2_s326k")
+region = Rect2(750, 0, 150, 250)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f07s6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j01mm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkele")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8207")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72k0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afryd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g1rv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f07s6"]
+atlas = ExtResource("3_j01mm")
+region = Rect2(0, 0, 600, 600)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtw16"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f07s6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u8207"]
-size = Vector2(120, 20)
+size = Vector2(80, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_72k0g"]
-size = Vector2(96, 48)
+size = Vector2(80, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afryd"]
 radius = 144.0
@@ -17,16 +84,20 @@ radius = 144.0
 script = ExtResource("1_s326k")
 metadata/_custom_type_script = "uid://cfdv2746dxo5o"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1401538255]
-position = Vector2(-8, -8)
-scale = Vector2(0.113131315, 0.10133841)
-texture = ExtResource("2_j01mm")
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=530581711]
+position = Vector2(0, -80)
+sprite_frames = SubResource("SpriteFrames_f07s6")
+autoplay = "default"
+frame_progress = 0.47452533
+
+[node name="Explosion" type="AnimatedSprite2D" parent="." unique_id=2099995159]
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_qtw16")
 
 [node name="UnitDetectionArea" type="Area2D" parent="." unique_id=857788213]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UnitDetectionArea" unique_id=924075611]
-position = Vector2(-20, 0)
 shape = SubResource("RectangleShape2D_u8207")
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=1402070582]
@@ -35,7 +106,7 @@ collision_mask = 0
 script = ExtResource("3_s326k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=704069739]
-position = Vector2(-8, -8)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_72k0g")
 
 [node name="ExplosionArea" type="Area2D" parent="." unique_id=412522133]
@@ -44,6 +115,13 @@ collision_layer = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea" unique_id=1028036132]
 shape = SubResource("CircleShape2D_afryd")
 
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=572287102]
+stream = ExtResource("5_lkele")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
 [connection signal="area_entered" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_entered"]
 [connection signal="area_exited" from="UnitDetectionArea" to="." method="_on_unit_detection_area_area_exited"]
 [connection signal="hit_by_projectile" from="DetectableArea" to="." method="_on_detectable_area_hit_by_projectile"]

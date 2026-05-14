@@ -3,22 +3,41 @@
 [ext_resource type="Script" uid="uid://fkx8gqqo3bmn" path="res://Scripts/level.gd" id="1_81xng"]
 [ext_resource type="Script" uid="uid://bq11bkwp74gi1" path="res://Scripts/level_serializer.gd" id="1_tumq0"]
 [ext_resource type="Script" uid="uid://c3btc60lgyywm" path="res://Scripts/wave_manager.gd" id="2_k5f4k"]
+[ext_resource type="AudioStream" uid="uid://clmrjkngijshu" path="res://Assets/SFX/Forest.mp3" id="2_pnhnk"]
 [ext_resource type="Script" uid="uid://dx7gxwspv65jt" path="res://Scripts/game_field.gd" id="3_6phgx"]
 [ext_resource type="Script" uid="uid://8gp2d1t6qwaa" path="res://Scripts/resource_manager.gd" id="4_8c0lf"]
 [ext_resource type="Script" uid="uid://qf13qgnl44p5" path="res://Scripts/gui/unit_loadout.gd" id="5_wqkje"]
 [ext_resource type="Script" uid="uid://4jcdsn2s58j3" path="res://Scripts/gui/unit_cards.gd" id="6_0f350"]
+[ext_resource type="Script" uid="uid://cpqj7lje8tirk" path="res://Scripts/tiles.gd" id="6_00k4y"]
 [ext_resource type="Script" uid="uid://d10718255r072" path="res://Scripts/gui/mana_counter.gd" id="6_754fn"]
 [ext_resource type="Script" uid="uid://bcnkfv5r2rce2" path="res://Scripts/field_border_shape.gd" id="6_bvt00"]
 [ext_resource type="Script" uid="uid://bwmnyjdha2lbt" path="res://Scripts/units.gd" id="6_qxfql"]
+[ext_resource type="Script" uid="uid://bf8nkvqq10acp" path="res://Scripts/enemies.gd" id="7_0cmrb"]
+[ext_resource type="Texture2D" uid="uid://1g8lpibrigcw" path="res://Assets/Images/UI/Panel1.png" id="8_crh0w"]
+[ext_resource type="Texture2D" uid="uid://drejsbhl63b00" path="res://Assets/Images/UI/Button2.png" id="8_nngtn"]
+[ext_resource type="AudioStream" uid="uid://c1kiv7wi2d8q8" path="res://Assets/SFX/Explosion.mp3" id="8_pnhnk"]
+[ext_resource type="Texture2D" uid="uid://ykvko1nyfhtv" path="res://Assets/Images/UI/Button2_pressed.png" id="9_vofx3"]
+[ext_resource type="Texture2D" uid="uid://demhmrunndwxh" path="res://Assets/Images/UI/Button2_hovered.png" id="10_00k4y"]
+[ext_resource type="Texture2D" uid="uid://b5pgv437umkw7" path="res://Assets/Images/UI/Mana.png" id="10_c7le1"]
 [ext_resource type="Script" uid="uid://dwne6l3y0phay" path="res://Scripts/gui/editor_gui.gd" id="10_oqgf2"]
 [ext_resource type="Script" uid="uid://ddbpppgjw1283" path="res://Scripts/gui/waves_list.gd" id="12_ha31o"]
+[ext_resource type="Script" uid="uid://cav2fyclhnvjc" path="res://Scripts/gui/field_size.gd" id="18_vofx3"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_bvt00"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8c0lf"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2klc5"]
+content_margin_left = 40.0
+texture = ExtResource("8_crh0w")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_crh0w"]
 
 [node name="Level" type="Node2D" unique_id=1554892295]
 script = ExtResource("1_81xng")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="." unique_id=749325027]
+stream = ExtResource("2_pnhnk")
+autoplay = true
+parameters/looping = true
 
 [node name="LevelSerializer" type="Node" parent="." unique_id=1159525868]
 script = ExtResource("1_tumq0")
@@ -35,10 +54,23 @@ script = ExtResource("4_8c0lf")
 [node name="GameField" type="Node2D" parent="." unique_id=878791011]
 script = ExtResource("3_6phgx")
 
-[node name="Units" type="Node" parent="GameField" unique_id=1842589509]
+[node name="Tiles" type="Node2D" parent="GameField" unique_id=822043445]
+script = ExtResource("6_00k4y")
+
+[node name="Enemies" type="Node2D" parent="GameField" unique_id=1674320031]
+script = ExtResource("7_0cmrb")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="GameField/Enemies" unique_id=1759876071]
+stream = ExtResource("8_pnhnk")
+volume_db = -10.0
+
+[node name="Decorations" type="Node2D" parent="GameField" unique_id=1034284733]
+
+[node name="Units" type="Node2D" parent="GameField" unique_id=920174830]
+y_sort_enabled = true
 script = ExtResource("6_qxfql")
 
-[node name="Projectiles" type="Node" parent="GameField" unique_id=418835466]
+[node name="Projectiles" type="Node2D" parent="GameField" unique_id=1342966591]
 
 [node name="UnitFieldPreview" type="Sprite2D" parent="GameField" unique_id=1873952451]
 modulate = Color(1, 1, 1, 0.2627451)
@@ -83,16 +115,23 @@ grow_vertical = 2
 [node name="Victory" type="Label" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2000088903]
 visible = false
 layout_mode = 2
-text = "Victory"
+theme_override_font_sizes/font_size = 50
+text = "ПОБЕДА!"
+horizontal_alignment = 1
 
 [node name="Defeat" type="Label" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2140803923]
 visible = false
 layout_mode = 2
-text = "Defeat"
+theme_override_font_sizes/font_size = 50
+text = "ПОРАЖЕНИЕ..."
 
-[node name="BackToMenu" type="Button" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=2064862431]
+[node name="BackToMenu" type="TextureButton" parent="GameGUI/EndLevelPanel/HBoxContainer" unique_id=416263255]
 layout_mode = 2
-text = "Menu"
+texture_normal = ExtResource("8_nngtn")
+texture_pressed = ExtResource("9_vofx3")
+texture_hover = ExtResource("10_00k4y")
+texture_disabled = ExtResource("8_nngtn")
+texture_focused = ExtResource("10_00k4y")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GameGUI" unique_id=1235830076]
 custom_minimum_size = Vector2(700, 200)
@@ -104,10 +143,19 @@ theme_override_constants/separation = 4
 [node name="ManaCounter" type="Label" parent="GameGUI/HBoxContainer" unique_id=1622670664]
 custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_8c0lf")
+theme_override_colors/font_color = Color(0.55738956, 0.0040755193, 0.9952645, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxTexture_2klc5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_crh0w")
 text = "0"
 vertical_alignment = 1
 script = ExtResource("6_754fn")
+
+[node name="ManaIcon" type="Sprite2D" parent="GameGUI/HBoxContainer/ManaCounter" unique_id=1816217156]
+position = Vector2(17.999998, 20.000002)
+scale = Vector2(0.49, 0.49000007)
+texture = ExtResource("10_c7le1")
 
 [node name="UnitLoadout" type="Control" parent="GameGUI/HBoxContainer" unique_id=380625637]
 layout_mode = 2
@@ -130,7 +178,7 @@ layout_mode = 2
 theme_override_constants/separation = 4
 script = ExtResource("6_0f350")
 
-[node name="QuitButton" type="Button" parent="GameGUI" unique_id=182246171]
+[node name="QuitButton" type="TextureButton" parent="GameGUI" unique_id=1270966132]
 process_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -138,7 +186,11 @@ anchor_right = 1.0
 offset_left = -42.0
 offset_bottom = 31.0
 grow_horizontal = 0
-text = "Quit"
+texture_normal = ExtResource("8_nngtn")
+texture_pressed = ExtResource("9_vofx3")
+texture_hover = ExtResource("10_00k4y")
+texture_disabled = ExtResource("8_nngtn")
+texture_focused = ExtResource("10_00k4y")
 
 [node name="EditorGUI" type="CanvasLayer" parent="." unique_id=652571334]
 process_mode = 3
@@ -146,18 +198,20 @@ visible = false
 script = ExtResource("10_oqgf2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EditorGUI" unique_id=365358028]
-custom_minimum_size = Vector2(500, 200)
-anchors_preset = 3
-anchor_left = 1.0
+custom_minimum_size = Vector2(600, 200)
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -171.0
-offset_top = -105.0
-grow_horizontal = 0
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+grow_horizontal = 2
 grow_vertical = 0
 
 [node name="WavesList" type="VBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=1893982659]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 script = ExtResource("12_ha31o")
 
@@ -166,48 +220,66 @@ layout_mode = 2
 
 [node name="SaveWaves" type="Button" parent="EditorGUI/VBoxContainer/WaveRelatedButtons" unique_id=1248001878]
 layout_mode = 2
-text = "Apply waves"
+text = "Применить изменения"
 
 [node name="AddWave" type="Button" parent="EditorGUI/VBoxContainer/WaveRelatedButtons" unique_id=431770268]
 layout_mode = 2
-text = "Add"
+text = "Добавить волну"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=662582821]
 layout_mode = 2
 
 [node name="Lawn" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=1235422609]
 layout_mode = 2
-text = "Lawn"
+text = "Лужайка"
 
 [node name="Stone" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=16239589]
 layout_mode = 2
-text = "Stone"
+text = "Камень"
 
 [node name="Cancel" type="Button" parent="EditorGUI/VBoxContainer/HBoxContainer" unique_id=1042006557]
 layout_mode = 2
-text = "Cancel"
+text = "Отмена"
+
+[node name="FieldSize" type="HBoxContainer" parent="EditorGUI/VBoxContainer" unique_id=1657904757]
+layout_mode = 2
+script = ExtResource("18_vofx3")
+
+[node name="Label" type="Label" parent="EditorGUI/VBoxContainer/FieldSize" unique_id=1298380483]
+layout_mode = 2
+text = "Размеры поля:"
+
+[node name="X" type="SpinBox" parent="EditorGUI/VBoxContainer/FieldSize" unique_id=1013311449]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="EditorGUI/VBoxContainer/FieldSize" unique_id=754567893]
+layout_mode = 2
+text = "x"
+
+[node name="Y" type="SpinBox" parent="EditorGUI/VBoxContainer/FieldSize" unique_id=2108222257]
+layout_mode = 2
 
 [node name="PauseButton" type="Button" parent="EditorGUI/VBoxContainer" unique_id=1956933928]
 layout_mode = 2
-text = "Pause/Unpause"
+text = "Пауза / Продолжить"
 
 [node name="SaveStateButton" type="Button" parent="EditorGUI/VBoxContainer" unique_id=824620632]
 layout_mode = 2
-text = "save level"
+text = "Сохранить"
 
 [connection signal="field_data_extracted" from="LevelSerializer" to="WaveManager" method="_on_level_loader_field_data_extracted"]
+[connection signal="field_data_extracted" from="LevelSerializer" to="EditorGUI/VBoxContainer/FieldSize" method="_on_level_serializer_field_data_extracted"]
 [connection signal="generate_unit_loadout" from="LevelSerializer" to="GameGUI/HBoxContainer/UnitLoadout" method="_on_level_loader_generate_unit_loadout"]
 [connection signal="wave_data_extracted" from="LevelSerializer" to="WaveManager" method="_on_level_loader_wave_data_extracted"]
 [connection signal="wave_data_extracted" from="LevelSerializer" to="EditorGUI/VBoxContainer/WavesList" method="_on_level_serializer_wave_data_extracted"]
 [connection signal="no_more_timed_waves" from="WaveManager" to="GameField" method="_on_wave_manager_no_more_timed_waves"]
 [connection signal="spawn_enemy_in_row" from="WaveManager" to="GameField" method="_on_wave_manager_spawn_enemy_in_row"]
-[connection signal="mana_value_changed" from="ResourceManager" to="GameGUI/HBoxContainer/ManaCounter" method="_on_resource_manager_mana_value_changed"]
-[connection signal="mana_value_changed" from="ResourceManager" to="GameGUI/HBoxContainer/UnitLoadout" method="_on_resource_manager_mana_value_changed"]
 [connection signal="timeout" from="ResourceManager/Timer" to="ResourceManager" method="_on_timer_timeout"]
 [connection signal="all_enemies_eliminated" from="GameField" to="." method="_on_game_field_all_enemies_eliminated"]
 [connection signal="mana_payment_needed" from="GameField" to="ResourceManager" method="_on_game_field_mana_payment_needed"]
 [connection signal="move_and_resize_field_border" from="GameField" to="GameField/FieldBorder/FieldBorderShape" method="_on_game_field_move_and_resize_field_border"]
 [connection signal="on_add_unit" from="GameField" to="GameField/Units" method="_on_game_field_on_add_unit"]
+[connection signal="tile_added" from="GameField" to="GameField/Tiles" method="_on_game_field_tile_added"]
 [connection signal="area_entered" from="GameField/FieldBorder" to="." method="_on_field_border_area_entered"]
 [connection signal="pressed" from="GameGUI/EndLevelPanel/HBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]
 [connection signal="generated_unit_cards" from="GameGUI/HBoxContainer/UnitLoadout" to="GameGUI/HBoxContainer/UnitLoadout/MarginContainer/UnitCards" method="_on_unit_loadout_generated_unit_cards"]
@@ -220,5 +292,8 @@ text = "save level"
 [connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Lawn" to="EditorGUI" method="_on_lawn_pressed"]
 [connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Stone" to="EditorGUI" method="_on_stone_pressed"]
 [connection signal="pressed" from="EditorGUI/VBoxContainer/HBoxContainer/Cancel" to="EditorGUI" method="_on_cancel_pressed"]
+[connection signal="field_size_changed" from="EditorGUI/VBoxContainer/FieldSize" to="GameField" method="_on_field_size_field_size_changed"]
+[connection signal="value_changed" from="EditorGUI/VBoxContainer/FieldSize/X" to="EditorGUI/VBoxContainer/FieldSize" method="_on_x_value_changed"]
+[connection signal="value_changed" from="EditorGUI/VBoxContainer/FieldSize/Y" to="EditorGUI/VBoxContainer/FieldSize" method="_on_y_value_changed"]
 [connection signal="pressed" from="EditorGUI/VBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]
 [connection signal="pressed" from="EditorGUI/VBoxContainer/SaveStateButton" to="LevelSerializer" method="_on_save_level_button_pressed"]

@@ -1,18 +1,90 @@
 [gd_scene format=3 uid="uid://dcb3bbnvmac5"]
 
 [ext_resource type="Script" uid="uid://7dq3bn2kh4wj" path="res://Scripts/units/mandrake_unit.gd" id="1_ypuoc"]
-[ext_resource type="Texture2D" uid="uid://bfrjkvsg5jjp0" path="res://Assets/Images/Units/Mandrake.png" id="2_bucqb"]
+[ext_resource type="Texture2D" uid="uid://d3we13hnivy47" path="res://Assets/Images/Units/MandrakeAnim.png" id="2_ypuoc"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_2epb6"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypuoc"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(0, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bucqb"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(140, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2epb6"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(280, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2fpo"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(420, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7md22"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(560, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijxdt"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(700, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uf1wg"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(840, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x68yy"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(980, 0, 140, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ybls"]
+atlas = ExtResource("2_ypuoc")
+region = Rect2(1120, 0, 140, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_joxbm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypuoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bucqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2epb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2fpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7md22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijxdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uf1wg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x68yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ybls")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2fpo"]
-size = Vector2(32, 48)
+size = Vector2(48, 48)
 
 [node name="MandrakeUnit" type="Node2D" unique_id=127200478]
 script = ExtResource("1_ypuoc")
 metadata/_custom_type_script = "uid://d2druhdrfqe43"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1792907624]
-texture = ExtResource("2_bucqb")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=297530593]
+sprite_frames = SubResource("SpriteFrames_joxbm")
+autoplay = "default"
 
 [node name="DetectableArea" type="Area2D" parent="." unique_id=1616385963]
 collision_mask = 0

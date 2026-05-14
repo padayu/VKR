@@ -1,21 +1,134 @@
 [gd_scene format=3 uid="uid://bag0u43ujnxk2"]
 
 [ext_resource type="Script" uid="uid://b3btua0gftpex" path="res://Scripts/units/archer_kitten_unit.gd" id="1_sq13s"]
-[ext_resource type="Texture2D" uid="uid://bpk83m0s0n6q6" path="res://Assets/Images/Units/Archer.png" id="2_sq13s"]
+[ext_resource type="Texture2D" uid="uid://56mehslbir4j" path="res://Assets/Images/Units/ArcherCatAnim.png" id="2_sq13s"]
+[ext_resource type="Texture2D" uid="uid://ns5pxr27i8yh" path="res://Assets/Images/Units/BowAnim.png" id="3_vslgk"]
 [ext_resource type="Script" uid="uid://4deahrdi42rp" path="res://Scripts/detectable_area.gd" id="3_w5apc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vslgk"]
+atlas = ExtResource("2_sq13s")
+region = Rect2(0, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5apc"]
+atlas = ExtResource("2_sq13s")
+region = Rect2(140, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oy64"]
+atlas = ExtResource("2_sq13s")
+region = Rect2(280, 0, 140, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_42r7l"]
+atlas = ExtResource("2_sq13s")
+region = Rect2(140, 100, 140, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yu3gh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vslgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oy64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vslgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oy64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vslgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oy64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42r7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vslgk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_42r7l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oy64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5apc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu3gh"]
+atlas = ExtResource("3_vslgk")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca2v0"]
+atlas = ExtResource("3_vslgk")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbuic"]
+atlas = ExtResource("3_vslgk")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_26u0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu3gh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca2v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbuic")
+}],
+"loop": false,
+"name": &"reloading",
+"speed": 0.5
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0oy64"]
 size = Vector2(842, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42r7l"]
-size = Vector2(48, 72)
+size = Vector2(80, 64)
 
 [node name="ArcherKittenUnit" type="Node2D" unique_id=1066441209]
 script = ExtResource("1_sq13s")
 metadata/_custom_type_script = "uid://d2druhdrfqe43"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542673207]
-texture = ExtResource("2_sq13s")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=673464568]
+sprite_frames = SubResource("SpriteFrames_yu3gh")
+autoplay = "default"
+
+[node name="Bow" type="AnimatedSprite2D" parent="." unique_id=2128030917]
+position = Vector2(48, 16)
+sprite_frames = SubResource("SpriteFrames_26u0c")
+animation = &"reloading"
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=528358360]
 collision_layer = 0
@@ -30,7 +143,7 @@ collision_mask = 0
 script = ExtResource("3_w5apc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectableArea" unique_id=690137512]
-position = Vector2(-8, 4)
+position = Vector2(24, 8)
 shape = SubResource("RectangleShape2D_42r7l")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1140609710]

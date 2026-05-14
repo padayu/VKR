@@ -2,6 +2,7 @@ extends Unit
 
 
 @onready var attack_timer = $AttackTimer
+@onready var bow = $Bow
 @onready var projectile_scene = preload("res://Scenes/arrow_projectile.tscn")
 
 
@@ -36,7 +37,9 @@ func change_state(new_state: state):
 func attack():
 	var projectile = projectile_scene.instantiate()
 	get_parent().get_parent().AddProjectile(projectile)
-	projectile.position = position
+	bow.stop()
+	bow.play("reloading")
+	projectile.position = position + Vector2(48, 16)
 
 
 func _on_attack_timer_timeout():
